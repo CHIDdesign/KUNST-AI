@@ -255,3 +255,50 @@ body.index-page::before {
     z-index: 4; /* Below crosshair, above background */
 }
 
+/* -------------------------------------
+   MOBILE RESPONSIVENESS
+   ------------------------------------- */
+@media (max-width: 768px) {
+    /* Hide custom cursors and crosshairs on mobile */
+    .cursor, .cursor-follower, .crosshair-x, .crosshair-y, .coord-tracker {
+        display: none !important;
+    }
+    
+    * {
+        cursor: auto;
+    }
+
+    .nav {
+        padding: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .nav-links a {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .hero {
+        padding-top: 50px;
+    }
+
+    .hero-logo-container {
+        /* Add side padding so it doesn't touch the edges */
+        width: calc(100vw - 32px);
+        height: 40vh; /* Shorter height to fit mobile aspect ratio */
+    }
+
+    .text-logo span {
+        font-size: 0.4rem !important; /* Force smaller text on mobile for density */
+    }
+
+    .download-btn {
+        margin-top: 2rem;
+        font-size: 0.75rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+

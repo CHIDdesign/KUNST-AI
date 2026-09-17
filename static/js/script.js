@@ -133,6 +133,13 @@ if (textContainer) {
         currentPath = [{x: e.clientX, y: e.clientY}];
     });
 
+    document.addEventListener('touchstart', (e) => {
+        if(e.target.closest('a') || e.target.closest('button')) return;
+        isDrawing = true;
+        const touch = e.touches[0];
+        currentPath = [{x: touch.clientX, y: touch.clientY}];
+    });
+
     document.addEventListener('mousemove', (e) => {
         // Crosshair update (Hardware accelerated)
         crossX.style.transform = `translate3d(0, ${e.clientY}px, 0)`;
@@ -144,9 +151,6 @@ if (textContainer) {
 
         if (!isDrawing) return;
         
-        // OPTIMIZATION & DESIGN: Downsample points. 
-        // Only record a point if it's far enough from the last.
-        // This dramatically improves performance AND naturally creates a smooth, "clay-like" blob.
         const lastPoint = currentPath[currentPath.length - 1];
         const dist = Math.hypot(e.clientX - lastPoint.x, e.clientY - lastPoint.y);
         if (dist > 35) {
@@ -154,23 +158,48 @@ if (textContainer) {
         }
     });
 
+    document.addEventListener('touchmove', (e) => {
+        if (!isDrawing) return;
+        // Prevent rubber-banding / scrolling on mobile while drawing
+        if (e.cancelable) e.preventDefault(); 
+        
+        const touch = e.touches[0];
+        const lastPoint = currentPath[currentPath.length - 1];
+        const dist = Math.hypot(touch.clientX - lastPoint.x, touch.clientY - lastPoint.y);
+        if (dist > 35) {
+            currentPath.push({x: touch.clientX, y: touch.clientY});
+        }
+    }, { passive: false });
+
     document.addEventListener('mouseup', (e) => {
         if (!isDrawing) return;
         isDrawing = false;
-        
-        // Push final point to ensure the shape closes exactly where mouse was released
         currentPath.push({x: e.clientX, y: e.clientY});
-        
+        saveShape();
+    });
+
+    document.addEventListener('touchend', (e) => {
+        if (!isDrawing) return;
+        isDrawing = false;
+        // Touchend doesn't have clientX in touches, use changedTouches if needed, but last recorded point is fine enough for touch.
+        if (e.changedTouches.length > 0) {
+            const touch = e.changedTouches[0];
+            currentPath.push({x: touch.clientX, y: touch.clientY});
+        }
+        saveShape();
+    });
+
+    function saveShape() {
         if (currentPath.length > 2) {
             shapes.push({
                 path: currentPath,
                 createdAt: Date.now(),
-                lifeTime: 3000, // Reduced to 3 seconds
-                fadeTime: 1000  // Fades out over 1 second
+                lifeTime: 3000,
+                fadeTime: 1000
             });
         }
         currentPath = [];
-    });
+    }
 
     // Render Loop for Canvas
     function renderCanvas() {
