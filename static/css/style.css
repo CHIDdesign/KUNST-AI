@@ -161,6 +161,7 @@ body.index-page {
 }
 
 .download-btn {
+    display: inline-block;
     margin-top: 1rem;
     padding: 0.75rem 2rem; /* Much smaller padding */
     background-color: var(--point-color);
@@ -187,6 +188,13 @@ body.index-page {
 .download-btn:active {
     transform: translate(4px, 4px);
     box-shadow: 0px 0px 0px var(--text-main);
+}
+
+.win-icon {
+    height: 1em;
+    width: auto;
+    vertical-align: -0.1em;
+    margin: 0 0.2em;
 }
 
 /* AR Scanning Grid Background */
