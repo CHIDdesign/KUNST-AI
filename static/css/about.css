@@ -1,10 +1,10 @@
 /* -------------------------------------
-   ABOUT PAGE SPECIFIC
+   ABOUT PAGE SPECIFIC (BRUTALIST REDESIGN)
    ------------------------------------- */
 body.about-page {
     overflow-x: hidden;
     overflow-y: auto;
-    padding-top: 80px; /* Nav height */
+    padding-top: 80px;
 }
 
 .marquee {
@@ -33,28 +33,12 @@ body.about-page {
 }
 
 .section {
-    min-height: 100vh;
+    min-height: auto;
+    padding: 6rem 4rem;
     border-bottom: 4px solid var(--text-muted);
     display: flex;
     flex-direction: column;
 }
-
-.grid-layout {
-    display: flex;
-    flex: 1;
-    width: 100%;
-}
-
-.grid-col {
-    flex: 1;
-    padding: 6rem 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.border-left { border-left: 4px solid var(--text-muted); }
-.border-right { border-right: 4px solid var(--text-muted); }
 
 .section-title {
     font-family: var(--font-display);
@@ -65,84 +49,96 @@ body.about-page {
     font-weight: 900;
 }
 
+.section-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
 .highlight {
     color: var(--point-color);
+}
+
+.highlight-bg {
+    background-color: var(--point-color);
+    color: var(--bg-color);
+    padding: 0 0.5rem;
 }
 
 .body-text {
     font-size: 1.25rem;
     line-height: 1.6;
     color: var(--text-main);
-    max-width: 600px;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-weight: 400;
 }
 
-.stats-box {
-    display: flex;
+/* Brutalist Grid for Features and Problems */
+.b-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-top: 2rem;
+    width: 100%;
 }
 
-.stat {
-    border: 2px solid var(--text-muted);
-    padding: 2rem;
-    flex: 1;
+.b-card {
+    border: 4px solid var(--text-muted);
     background: var(--bg-color);
-    box-shadow: 6px 6px 0px var(--point-color);
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-.stat h3 {
+.b-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0px var(--point-color);
+    border-color: var(--point-color);
+}
+
+.b-card-num {
     font-family: var(--font-display);
     font-size: 4rem;
-    color: var(--text-main);
-    line-height: 1;
-    margin-bottom: 1rem;
-}
-
-.stat p {
-    color: var(--point-color);
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-/* Images */
-.image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 500px;
-    overflow: hidden;
-    background-color: var(--bg-color);
-    border: 2px solid var(--text-muted);
-}
-
-/* Grain overlay */
-.image-wrapper::before {
-    content: '';
+    color: var(--text-muted);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E');
-    pointer-events: none;
-    z-index: 2;
-    mix-blend-mode: overlay;
+    top: 1rem;
+    right: 1.5rem;
+    line-height: 1;
+    opacity: 0.3;
 }
 
-.project-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(1.5) brightness(0.8);
-    transition: filter 0.3s ease, transform 0.3s ease;
+.b-card-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    z-index: 1;
 }
 
-.image-wrapper:hover .project-img {
-    filter: grayscale(0%) contrast(1.2) brightness(1);
-    transform: scale(1.02);
+.b-card-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    z-index: 1;
+}
+
+.b-card-desc strong {
+    color: var(--text-main);
+}
+
+.b-badge {
+    display: inline-block;
+    border: 2px solid var(--point-color);
+    color: var(--point-color);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    align-self: flex-start;
 }
 
 /* Mission Section */
@@ -180,10 +176,130 @@ body.about-page {
     padding: 0 0.5rem;
 }
 
+/* Custom HTML Architecture Diagram (Brutalist) */
+.arch-custom-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    font-family: var(--font-mono);
+}
+
+.arch-layer {
+    width: 100%;
+    border: 4px solid var(--text-muted);
+    background: #0a0a0a;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+}
+.arch-layer:hover {
+    border-color: var(--point-color);
+    transform: translateY(-2px);
+}
+.arch-layer h3 {
+    font-family: var(--font-display);
+    color: var(--point-color);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.arch-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.arch-box {
+    border: 2px solid var(--text-main);
+    padding: 1.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: #1a1a1a;
+    color: var(--text-main);
+}
+.arch-box.highlight-box {
+    border-color: var(--point-color);
+    color: var(--text-main);
+    background: rgba(255, 115, 0, 0.1);
+}
+
+.arch-engine {
+    border: 2px dashed var(--text-muted);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: #121212;
+}
+.engine-title {
+    color: var(--text-main);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--point-color);
+    padding-bottom: 0.5rem;
+}
+.engine-step {
+    background: var(--text-muted);
+    color: var(--bg-color);
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    position: relative;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.engine-step:not(:last-child)::after {
+    content: '↓';
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--point-color);
+    font-weight: 900;
+    font-size: 1.4rem;
+}
+.engine-step:last-child {
+    margin-bottom: 0;
+}
+
+.arch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 0;
+    color: var(--point-color);
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+}
+.connector-line {
+    width: 4px;
+    height: 40px;
+    background-color: var(--point-color);
+}
+.connector-label {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    background: #1a1a1a;
+    padding: 0.4rem 1rem;
+    border: 2px solid var(--point-color);
+    margin: -5px 0;
+    z-index: 2;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
 /* Footer */
 .footer {
     padding: 6rem 4rem;
-    border-top: 4px solid var(--text-muted);
     background: var(--bg-color);
 }
 
@@ -210,27 +326,48 @@ body.about-page {
 }
 
 @media (max-width: 1024px) {
-    .grid-layout {
-        flex-direction: column;
-    }
-    .grid-layout.reverse {
-        flex-direction: column-reverse;
-    }
-    .border-left, .border-right {
-        border: none;
-        border-bottom: 4px solid var(--text-muted);
-    }
-    .grid-col {
+    .section {
         padding: 4rem 2rem;
     }
     .section-title {
         font-size: 3rem;
     }
-    .stat h3 {
-        font-size: 3rem;
-    }
     .mission-text {
         font-size: 1.5rem;
     }
+    .footer-brand {
+        font-size: 4rem;
+    }
 }
 
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    .b-card {
+        padding: 1.5rem;
+    }
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    .footer-info p {
+        text-align: left;
+    }
+    .b-grid {
+        grid-template-columns: 1fr;
+    }
+    .arch-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .arch-layer {
+        padding: 1.5rem 1rem;
+    }
+    .arch-layer h3 {
+        font-size: 1.2rem;
+    }
+    .arch-custom-diagram {
+        margin: 1rem auto;
+    }
+}
