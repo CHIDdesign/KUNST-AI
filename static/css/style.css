@@ -1,0 +1,257 @@
+:root {
+    --bg-color: #121212;
+    --point-color: #FF7300;
+    --text-main: #F4F4F4;
+    --text-muted: #61605F;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Syncopate', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Custom cursor everywhere */
+}
+
+html, body {
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-mono);
+}
+
+/* Base custom cursor */
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background-color: var(--point-color);
+    border-radius: 0; 
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    /* transition removed for instantaneous response */
+}
+
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--text-muted);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, background-color 0.3s;
+}
+
+/* Brutalist Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    z-index: 100;
+    background: transparent;
+    border-bottom: none; /* Removed */
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* If a logo image is used instead */
+.nav-brand img {
+    height: 24px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+    border: 1px solid var(--point-color);
+    color: var(--point-color);
+    background: rgba(255, 115, 0, 0.1);
+}
+
+/* -------------------------------------
+   INDEX (HERO) PAGE SPECIFIC
+   ------------------------------------- */
+body.index-page {
+    overflow: hidden; /* No scroll on index */
+    height: 100vh;
+    background-color: #080808; /* Darker background just for index */
+}
+
+.hero {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 60px; /* Offset for nav */
+}
+
+.hero-logo-container {
+    width: 95vw;
+    max-width: 1800px; /* Made the logo much larger */
+    height: 75vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-logo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    contain: strict; /* CRITICAL OPTIMIZATION: Isolates layout recalculations */
+    will-change: contents; /* Hints browser for optimization */
+    /* Mask is applied via JS */
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.text-logo span {
+    display: inline-block;
+    padding: 0 2px;
+    line-height: 1.1;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    transition: color 0.1s, font-weight 0.1s;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.download-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem; /* Much smaller padding */
+    background-color: var(--point-color);
+    color: var(--bg-color);
+    font-family: var(--font-display);
+    font-weight: 700; /* Less heavy weight */
+    font-size: 0.9rem; /* Much smaller font size */
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    border: 2px solid var(--point-color); /* Thinner border */
+    box-shadow: 4px 4px 0px var(--text-main); /* Smaller shadow */
+    transition: all 0.1s ease;
+}
+
+.download-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-main);
+    background-color: var(--text-main);
+    color: var(--bg-color);
+    border-color: var(--text-main);
+}
+
+.download-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--text-main);
+}
+
+/* AR Scanning Grid Background */
+body.index-page::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background-image: 
+        linear-gradient(rgba(255, 115, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 115, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* AR Crosshair */
+.crosshair-x, .crosshair-y {
+    position: fixed;
+    background-color: var(--point-color);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: screen;
+    box-shadow: 0 0 10px var(--point-color);
+}
+.crosshair-x {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 1px;
+}
+.crosshair-y {
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100vh;
+}
+
+/* Coordinates Text */
+.coord-tracker {
+    position: fixed;
+    color: var(--point-color);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    pointer-events: none;
+    z-index: 6;
+    opacity: 0.9;
+    white-space: nowrap;
+    mix-blend-mode: screen;
+    text-shadow: 0 0 5px rgba(255, 115, 0, 0.5);
+}
+
+/* AR Drawing Canvas */
+#ar-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 4; /* Below crosshair, above background */
+}
+
