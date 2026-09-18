@@ -5,217 +5,305 @@ body.about-page {
     overflow-x: hidden;
     overflow-y: auto;
     padding-top: 80px;
+    background-color: var(--bg-color);
 }
 
-.marquee {
-    width: 100%;
-    background-color: var(--point-color);
-    color: var(--bg-color);
-    padding: 1.5rem 0;
-    overflow: hidden;
-    white-space: nowrap;
-    border-bottom: 4px solid var(--text-main);
-    border-top: 4px solid var(--text-main);
-}
-
-.marquee-content {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 900;
-    animation: marquee 15s linear infinite;
-    text-transform: uppercase;
-}
-
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.section {
-    min-height: auto;
-    padding: 6rem 4rem;
-    border-bottom: 4px solid var(--text-muted);
-    display: flex;
-    flex-direction: column;
-}
-
+/* Base Utility Classes */
 .section-title {
     font-family: var(--font-display);
     font-size: 4rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     line-height: 1;
     text-transform: uppercase;
     font-weight: 900;
 }
-
-.section-subtitle {
-    font-size: 1.5rem;
+.section-desc {
+    font-size: 1.25rem;
     color: var(--text-muted);
-    margin-bottom: 3rem;
-    font-weight: 700;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    line-height: 1.6;
 }
-
-.highlight {
-    color: var(--point-color);
-}
-
+.highlight { color: var(--point-color); }
 .highlight-bg {
     background-color: var(--point-color);
     color: var(--bg-color);
-    padding: 0 0.5rem;
 }
 
-.body-text {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: var(--text-main);
-    margin-bottom: 2rem;
-    font-weight: 400;
-}
-
-/* Brutalist Grid for Features and Problems */
-.b-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    width: 100%;
-}
-
-.b-card {
-    border: 4px solid var(--text-muted);
-    background: var(--bg-color);
-    padding: 2.5rem;
-    position: relative;
-    transition: all 0.2s ease;
+/* 1. TECHNICAL HERO */
+.hero-section {
+    min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    border-bottom: 4px solid var(--text-muted);
 }
-
-.b-card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0px var(--point-color);
-    border-color: var(--point-color);
+.eyebrow-tech {
+    font-size: 1rem;
+    color: var(--point-color);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
-
-.b-card-num {
+.hero-headline {
     font-family: var(--font-display);
-    font-size: 4rem;
+    font-size: 8rem;
+    line-height: 0.9;
+    color: var(--text-main);
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+}
+.tech-subtext {
+    font-size: 1.5rem;
+    max-width: 900px;
     color: var(--text-muted);
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    line-height: 1;
-    opacity: 0.3;
+    font-weight: 400;
+    line-height: 1.8;
 }
 
-.b-card-title {
+/* 2. PROBLEM STATEMENT */
+.manifesto-section {
+    padding: 8rem 2rem;
+    border-bottom: 4px solid var(--text-muted);
+}
+.m-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 4rem auto 0 auto;
+}
+.m-card {
+    border: 2px solid #333;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    background: #0d0d0d;
+}
+.m-card:hover {
+    border-color: #666;
+    background: #151515;
+}
+.m-card.highlight-card {
+    border-color: var(--point-color);
+    background: rgba(255, 115, 0, 0.05);
+}
+.m-card svg {
+    width: 48px;
+    height: 48px;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+.m-card.highlight-card svg {
+    color: var(--point-color);
+}
+.m-card h3 {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--text-main);
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+    margin: 0;
+}
+.m-card.highlight-card h3 {
+    color: var(--point-color);
+    border-color: rgba(255, 115, 0, 0.3);
+}
+.m-card p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #a0a0a0;
+    margin: 0;
+}
+.m-card p strong {
+    color: #cccccc;
+    font-weight: 700;
+}
+.m-card.highlight-card p {
+    color: #cccccc;
+}
+.m-card.highlight-card p strong {
+    color: var(--text-main);
+}
+
+/* 3. CORE ALGORITHMS (STICKY STACK) */
+/* 3. CORE ALGORITHMS (HORIZONTAL HIGHLIGHT) */
+.models-section {
+    padding: 8rem 0;
+    background-color: var(--bg-color);
+    border-bottom: 4px solid var(--text-muted);
+}
+.models-overflow {
+    width: 100%;
+    overflow: hidden;
+}
+.models-track {
+    display: flex;
+    width: max-content;
+    /* Center the first card on desktop: 50vw - half of card width (200px) */
+    padding-left: calc(50vw - 200px);
+    padding-right: calc(50vw - 200px);
+    gap: 3rem;
+    align-items: center;
+    height: 70vh;
+}
+.spec-card {
+    width: 400px;
+    height: 480px;
+    flex-shrink: 0;
+    border: 2px solid #333;
+    background: #0d0d0d;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-muted);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.4;
+    transform: scale(0.9);
+}
+/* Active state triggered by GSAP progress */
+.spec-card.active {
+    background: var(--text-main);
+    border-color: var(--point-color);
+    color: var(--bg-color);
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 16px 16px 0px var(--point-color);
+}
+.spec-card.active .spec-logo {
+    color: var(--text-main);
+}
+.spec-card.active .spec-logo-img {
+    filter: brightness(0);
+}
+.spec-card.active .spec-title {
+    color: var(--bg-color);
+}
+.spec-card.active .spec-vendor {
+    color: #444;
+    border-color: #ccc;
+}
+.spec-card.active .spec-desc {
+    color: #222;
+}
+
+.spec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.spec-badge {
+    color: var(--point-color);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.spec-logo {
+    color: var(--bg-color);
+    transition: all 0.2s ease;
+}
+.spec-logo-img {
+    height: 24px;
+    width: auto;
+    filter: brightness(0); /* Black logo on white */
+    transition: all 0.2s ease;
+}
+.spec-title {
     font-family: var(--font-display);
     font-size: 1.5rem;
-    color: var(--text-main);
-    margin-bottom: 1rem;
-    font-weight: 700;
-    z-index: 1;
-}
-
-.b-card-desc {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--text-muted);
-    z-index: 1;
-}
-
-.b-card-desc strong {
-    color: var(--text-main);
-}
-
-.b-badge {
-    display: inline-block;
-    border: 2px solid var(--point-color);
-    color: var(--point-color);
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    align-self: flex-start;
-}
-
-/* Mission Section */
-.mission-section {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8rem 2rem;
-    background-color: var(--point-color);
     color: var(--bg-color);
-    border-bottom: 4px solid var(--text-main);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.spec-vendor {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+.spec-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #222;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
-.huge-text {
-    font-family: var(--font-display);
-    font-size: 15vw;
-    line-height: 0.8;
-    color: var(--point-color);
-    -webkit-text-stroke: 4px var(--bg-color);
-    margin-bottom: 3rem;
-    font-weight: 900;
+/* 4. SYSTEM ARCHITECTURE (HORIZONTAL PAN) */
+.arch-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-weight: 700;
 }
-
-.mission-text {
-    font-size: 2.5rem;
-    max-width: 1000px;
-    line-height: 1.3;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.mission-text .highlight {
-    color: var(--text-main);
-    background: var(--bg-color);
-    padding: 0 0.5rem;
-}
-
-/* Custom HTML Architecture Diagram (Brutalist) */
-.arch-custom-diagram {
+.arch-data-flow {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 2rem auto;
+    gap: 1rem;
+}
+.flow-item {
+    background: #1a1a1a;
+    padding: 1rem;
+    border-left: 2px solid var(--point-color);
+    font-size: 0.95rem;
+    color: var(--text-main);
     font-family: var(--font-mono);
 }
 
+/* 5. ARCHITECTURE (HORIZONTAL PAN) */
+.arch-section {
+    background-color: #0a0a0a;
+    border-top: 4px solid var(--text-muted);
+    position: relative;
+}
+.horizontal-overflow {
+    overflow: hidden;
+    width: 100%;
+}
+.horizontal-track {
+    display: flex;
+    height: 100vh; /* Viewport height for pinning */
+    align-items: center;
+    padding-left: 4rem; /* Initial offset */
+}
+.h-panel {
+    width: 450px;
+    flex-shrink: 0;
+    padding-right: 4rem;
+    display: flex;
+    align-items: center;
+}
+.h-panel-wide {
+    width: 600px;
+}
+
+/* Arch diagram styling */
 .arch-layer {
     width: 100%;
     border: 4px solid var(--text-muted);
-    background: #0a0a0a;
+    background: #121212;
     padding: 2.5rem;
-    text-align: center;
     position: relative;
-    transition: transform 0.2s, border-color 0.2s;
-    box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
-}
-.arch-layer:hover {
-    border-color: var(--point-color);
-    transform: translateY(-2px);
 }
 .arch-layer h3 {
     font-family: var(--font-display);
     color: var(--point-color);
     font-size: 1.5rem;
-    margin-bottom: 2rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
-
 .arch-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
-
 .arch-box {
     border: 2px solid var(--text-main);
     padding: 1.2rem;
@@ -224,12 +312,11 @@ body.about-page {
     background: #1a1a1a;
     color: var(--text-main);
 }
-.arch-box.highlight-box {
+.highlight-box {
     border-color: var(--point-color);
     color: var(--text-main);
     background: rgba(255, 115, 0, 0.1);
 }
-
 .arch-engine {
     border: 2px dashed var(--text-muted);
     padding: 1.5rem;
@@ -249,66 +336,24 @@ body.about-page {
 .engine-step {
     background: var(--text-muted);
     color: var(--bg-color);
-    padding: 0.8rem 1rem;
+    padding: 0.5rem;
     font-weight: 700;
-    font-size: 0.95rem;
-    position: relative;
-    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
     text-align: center;
-}
-.engine-step:not(:last-child)::after {
-    content: '↓';
-    position: absolute;
-    bottom: -22px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--point-color);
-    font-weight: 900;
-    font-size: 1.4rem;
-}
-.engine-step:last-child {
-    margin-bottom: 0;
-}
-
-.arch-connector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0.5rem 0;
-    color: var(--point-color);
-    font-weight: 700;
-    text-align: center;
-    width: 100%;
-}
-.connector-line {
-    width: 4px;
-    height: 40px;
-    background-color: var(--point-color);
-}
-.connector-label {
-    font-size: 0.9rem;
-    color: var(--text-main);
-    background: #1a1a1a;
-    padding: 0.4rem 1rem;
-    border: 2px solid var(--point-color);
-    margin: -5px 0;
-    z-index: 2;
-    text-transform: uppercase;
-    font-weight: 900;
 }
 
 /* Footer */
 .footer {
     padding: 6rem 4rem;
     background: var(--bg-color);
+    border-top: 4px solid var(--text-muted);
 }
-
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
-
 .footer-brand {
     font-family: var(--font-display);
     font-size: 6rem;
@@ -316,7 +361,6 @@ body.about-page {
     color: var(--point-color);
     line-height: 1;
 }
-
 .footer-info p {
     color: var(--text-main);
     font-size: 1rem;
@@ -325,49 +369,34 @@ body.about-page {
     font-family: var(--font-mono);
 }
 
+/* Responsive */
 @media (max-width: 1024px) {
-    .section {
+    .hero-split { grid-template-columns: 1fr; }
+    .hero-headline { font-size: 5rem; }
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .manifesto-grid { grid-template-columns: 1fr; }
+    .hero-section, .manifesto-section, .features-section {
         padding: 4rem 2rem;
     }
-    .section-title {
-        font-size: 3rem;
+    .spec-card {
+        width: 85vw;
+        height: auto;
+        padding: 2rem;
     }
-    .mission-text {
-        font-size: 1.5rem;
-    }
-    .footer-brand {
-        font-size: 4rem;
+    .models-track {
+        padding-left: calc(50vw - 42.5vw);
+        padding-right: calc(50vw - 42.5vw);
+        gap: 1.5rem;
     }
 }
-
 @media (max-width: 768px) {
-    .section-title {
-        font-size: 2rem;
-    }
-    .b-card {
-        padding: 1.5rem;
-    }
-    .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-    }
-    .footer-info p {
-        text-align: left;
-    }
-    .b-grid {
-        grid-template-columns: 1fr;
-    }
-    .arch-grid-2 {
-        grid-template-columns: 1fr;
-    }
-    .arch-layer {
-        padding: 1.5rem 1rem;
-    }
-    .arch-layer h3 {
-        font-size: 1.2rem;
-    }
-    .arch-custom-diagram {
-        margin: 1rem auto;
-    }
+    .hero-headline { font-size: 3.5rem; }
+    .m-cards-grid { grid-template-columns: 1fr; }
+    .bento-large, .bento-wide { grid-column: span 1; }
+    .manifesto-points { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    .footer-info p { text-align: left; }
+    .h-panel, .h-panel-wide { width: 85vw; padding-right: 2rem; }
 }

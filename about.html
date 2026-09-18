@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KUNST - AR Docent Glasses</title>
+    <title>KUNST - Technical Architecture & Vision</title>
     <link rel="icon" type="image/svg+xml" href="assets/main/KUNST_favicon.svg">
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/about.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Syncopate:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body class="about-page">
+<body class="about-page technical-mode">
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
@@ -20,215 +22,222 @@
             <img src="assets/main/KUNST_main logo.svg" alt="KUNST">
         </a>
         <div class="nav-links">
-            <a href="about.html">ABOUT KUNST</a>
+            <a href="about.html">ARCHITECTURE</a>
             <a href="https://chid.kr/" target="_blank">DESIGNER</a>
         </div>
     </nav>
 
-    <div class="marquee">
-        <div class="marquee-content">
-            TRANSFORM THE USER INTO "ART CRITICS" &mdash; AUGMENTED REALITY DOCENT GLASSES &mdash; A NEW WAY TO SEE, QUESTION, AND UNDERSTAND &mdash; 
-            TRANSFORM THE USER INTO "ART CRITICS" &mdash; AUGMENTED REALITY DOCENT GLASSES &mdash; A NEW WAY TO SEE, QUESTION, AND UNDERSTAND &mdash; 
+    <!-- 1. TECHNICAL HERO -->
+    <section class="hero-section text-heavy">
+        <div class="hero-content" style="max-width: 1200px;">
+            <div class="eyebrow-tech">SYSTEM SPECIFICATION &amp; BACKGROUND</div>
+            <h1 class="hero-headline">KUNST:<br>MULTIMODAL AR<br>DOCENT SYSTEM.</h1>
+            <p class="hero-subtext tech-subtext">
+                KUNST는 수동적인 관람 형태를 능동적인 예술 비평으로 전환하기 위해 설계된 차세대 혼합현실(XR) 시스템입니다. 실시간 컴퓨터 비전, 분산 GPU 연산, 그리고 대화형 LLM을 결합하여 관람객과 작품 사이의 장벽을 허물고 몰입형 상호작용을 제공합니다.
+            </p>
         </div>
-    </div>
-
-    <section class="mission-section">
-        <h1 class="huge-text">KUNST</h1>
-        <p class="mission-text">
-            KUNST aims to create an <span class="highlight">Experience</span><br>
-            where visitors <span class="highlight">Actively Explore</span> &amp; <span class="highlight">Interpret</span><br>
-            with their own perspectives and questions.
-        </p>
     </section>
 
-    <!-- Product Identity & Problem -->
-    <section class="section">
-        <h2 class="section-title">THE OLD WAY IS <span class="highlight">BROKEN</span></h2>
-        <p class="body-text" style="max-width: 800px;">
-            기존의 도슨트 장비(음성 안내기, 스마트폰 앱)는 관람객과 작품 사이의 장벽을 만듭니다. KUNST는 이러한 문제들을 증강현실(AR)과 대화형 AI로 해결하여 수동적인 관람객을 능동적인 <span class="highlight">예술 비평가(Art Critics)</span>로 변화시킵니다.
-        </p>
-        <div class="b-grid" style="margin-top: 2rem;">
-            <div class="b-card">
-                <div class="b-card-num">01</div>
-                <div class="b-card-title">소통 불가</div>
-                <div class="b-card-desc">
-                    기존 기기는 일방적 음성 재생만 가능하지만, KUNST는 대화형 AI를 통해 즉각적인 질의응답이 가능합니다.
-                </div>
+    <!-- 2. PROBLEM STATEMENT -->
+    <section class="manifesto-section">
+        <h2 class="section-title text-center" style="text-align: center;">PROBLEM <span class="highlight">STATEMENT</span></h2>
+        
+        <div class="m-cards-grid">
+            <div class="m-card">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+                <h3>01 / HUMAN BOTTLENECK</h3>
+                <p>전문 큐레이터 동행 투어는 정해진 시간과 한정된 인원이라는 물리적 제약을 지닙니다. 관람객들은 작은 작품 하나를 보기 위해 그룹으로 몰려들어야 하며, 이는 필연적으로 <strong>시야의 제한과 몰입의 붕괴</strong>를 초래합니다. 또한, 일방적으로 쏟아지는 방대한 해설을 수동적으로 들어야 하므로 관람객의 육체적, 인지적 피로가 빠르게 누적됩니다.</p>
             </div>
-            <div class="b-card">
-                <div class="b-card-num">02</div>
-                <div class="b-card-title">불편한 사용성</div>
-                <div class="b-card-desc">
-                    앱 설치, 화면 터치, 시선 분산 등으로 몰입이 깨지는 현상을 AR 화면과 <strong>제스처 제어</strong>로 해결합니다.
-                </div>
+            
+            <div class="m-card">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+                <h3>02 / ANALOG FRICTION</h3>
+                <p>차선책으로 등장한 오디오 디바이스 대여 서비스 역시 근본적인 해결책이 아닙니다. 철저히 선형적으로 녹음된 음성본에 의존하며, 작품 옆에 붙은 번호를 찾아 기기에 입력하거나 QR 코드를 스캔해야 합니다. 이러한 <strong>단절되고 아날로그적인 상호작용</strong>은 작품 감상의 흐름을 끊고 시선을 분산시킵니다.</p>
             </div>
-            <div class="b-card">
-                <div class="b-card-num">03</div>
-                <div class="b-card-title">제한된 정보</div>
-                <div class="b-card-desc">
-                    청각에만 의존하던 방식을 넘어, 시각과 청각을 결합한 <strong>멀티모달(Multimodal)</strong> 방식으로 정보를 제공합니다.
-                </div>
+            
+            <div class="m-card highlight-card">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+                <h3>03 / THE XR PARADIGM</h3>
+                <p>사람들의 문화 생활이 <strong>Extended Reality(XR)</strong> 등 차세대 기술과 융합되는 흐름에 발맞춰 KUNST는 모든 마찰을 제거합니다. 관람객의 시선이 머무는 곳이 곧 상호작용의 시작입니다. 작품을 바라보며 허공에 핀치(Pinch) 제스처를 취하는 것만으로, 맥락을 완벽히 이해하는 나만의 실시간 쌍방향 AI 큐레이팅이 시작됩니다.</p>
             </div>
         </div>
     </section>
 
-    <!-- Core Features -->
-    <section class="section">
-        <h2 class="section-title">THE <span class="highlight">EXPERIENCE</span></h2>
-        <p class="section-subtitle">핵심 기능 및 작동 방식</p>
-        <div class="b-grid">
-            <div class="b-card">
-                <div class="b-badge">Hand Tracking</div>
-                <div class="b-card-title">정교한 핸드 트래킹</div>
-                <div class="b-card-desc">듀얼 카메라가 손 움직임을 실시간으로 추적하여 별도 컨트롤러 없이 맨손으로 허공의 UI를 직관적으로 조작합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">AI Communication</div>
-                <div class="b-card-title">대화형 인공지능</div>
-                <div class="b-card-desc">내장된 LLM이 관람객의 질문에 실시간으로 답변하며, 궁금해할 만한 다음 질문을 미리 예측하여 제안합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">AR Navigation</div>
-                <div class="b-card-title">AR 직관적 네비게이션</div>
-                <div class="b-card-desc">사용자의 현재 위치와 연동되어 시야(AR 화면)에 직접 최적의 관람 동선을 방해 없이 안내합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">View Control</div>
-                <div class="b-card-title">Show &amp; Hide</div>
-                <div class="b-card-desc">버튼 하나로 AR 정보 레이어를 켜고 꺼 디지털 해설 모드와 아날로그 감상 모드를 즉각적으로 전환합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">Social Interaction</div>
-                <div class="b-card-title">Add Yourself</div>
-                <div class="b-card-desc">관람객이 자신의 감상평을 가상의 '스티커' 형태로 3D 공간상에 남겨 커뮤니티로 전시 공간을 확장시킵니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">Microcopy</div>
-                <div class="b-card-title">위트 있는 마이크로카피</div>
-                <div class="b-card-desc">시스템 로딩 중 "모나리자의 눈썹을 찾는 중"과 같은 재치 있는 문구를 띄워 대기 시간조차 전시 경험으로 승화시킵니다.</div>
-            </div>
-        </div>
-    </section>
+    <!-- 3. CORE ALGORITHMS (HORIZONTAL HIGHLIGHT) -->
+    <section class="models-section" id="models-wrap">
+        <h2 class="section-title text-center" style="text-align: center;">CORE <span class="highlight">ALGORITHMS</span></h2>
+        <p class="section-desc" style="margin: 0 auto 4rem auto; text-align: center;">KUNST 시스템의 두뇌 역할을 하는 오픈소스 및 상용 AI 모델 파이프라인 명세서입니다.</p>
 
-    <!-- Architecture -->
-    <section class="section">
-        <h2 class="section-title">SYSTEM <span class="highlight">ARCHITECTURE</span></h2>
-        <p class="section-subtitle">KUNST 2.0 서비스 구조도</p>
-        <p class="body-text">
-            스마트글래스와 GPU 서버의 분산 처리를 지원하며, 제스처 인식과 도슨트 AI가 결합된 최신 아키텍처입니다.
-        </p>
-
-        <!-- Custom HTML Brutalist Architecture Diagram -->
-        <div class="arch-custom-diagram">
-            
-            <!-- Layer 1: User & Art -->
-            <div class="arch-layer">
-                <h3>👤 관람객 &amp; 🎨 예술품</h3>
-                <div class="arch-box" style="text-align: center; border: none; background: transparent;">
-                    시야와 행동, 그리고 목소리를 통한 직접적인 상호작용
-                </div>
-            </div>
-            
-            <div class="arch-connector">
-                <div class="connector-line"></div>
-                <div class="connector-label">시청각 정보 및 손 제스처 입력 / AR 피드백 출력</div>
-                <div class="connector-line"></div>
-            </div>
-            
-            <!-- Layer 2: Client -->
-            <div class="arch-layer">
-                <h3>👓 KUNST 클라이언트 (프론트엔드)</h3>
-                <div class="arch-grid-2">
-                    <div class="arch-box">📷 카메라 &amp; 마이크<br><span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">비디오 및 오디오 스트림 수집</span></div>
-                    <div class="arch-box">✨ 투명 AR 디스플레이<br><span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">윤곽선, 자막 및 시각적 피드백 렌더링</span></div>
-                </div>
-            </div>
-
-            <div class="arch-connector">
-                <div class="connector-line"></div>
-                <div class="connector-label">스트림 전송 및 연산 결과 수신</div>
-                <div class="connector-line"></div>
-            </div>
-
-            <!-- Layer 3: Server -->
-            <div class="arch-layer">
-                <h3>💻 KUNST 백엔드 서버 (GPU &amp; AI 연산)</h3>
+        <div class="models-overflow">
+            <div class="models-track" id="models-track">
                 
-                <div class="arch-box highlight-box" style="margin-bottom: 2rem; text-align: center;">
-                    🖐️ <strong>손 추적 엔진:</strong> YOLOv10n-hands + MediaPipe<br>
-                    <span style="font-size:0.9rem; font-weight:400;">화면에서 손을 찾고 '핀치(Pinch)' 동작을 인식하여 도슨트 엔진 제어</span>
-                </div>
-
-                <div class="arch-grid-2">
-                    <div class="arch-engine">
-                        <div class="engine-title">👁️ 비전 엔진</div>
-                        <div class="engine-step">1. 작품 후보군 감지 (YOLOE)</div>
-                        <div class="engine-step">2. 특징점 기반 작품 판별 (DINOv2)</div>
-                        <div class="engine-step">3. 정밀 실루엣 추출 (SAM 2.1)</div>
+                <!-- Vision: YOLOE -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">VISION ENGINE</div>
+                        <div class="spec-logo">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="12" r="3"></circle></svg>
+                        </div>
                     </div>
-                    
-                    <div class="arch-engine">
-                        <div class="engine-title">🤖 AI 도슨트 엔진</div>
-                        <div class="engine-step">1. 호출 감지 및 음성 인식 (sherpa-onnx)</div>
-                        <div class="engine-step">2. 의도 파악 및 해설 생성 (Gemini API)</div>
-                        <div class="engine-step">3. 텍스트 음성 합성 (Supertonic 3)</div>
+                    <div class="spec-title">YOLOE-26s</div>
+                    <div class="spec-vendor">Object Detection</div>
+                    <div class="spec-desc">카메라 시야 내에서 예술품 후보군의 Bounding Box를 0.01초(초저지연) 내에 감지합니다. 전체 컴퓨팅 파이프라인의 연산 병목을 막는 핵심 전처리 모델입니다.</div>
+                </div>
+
+                <!-- Vision: DINOv2 -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">VISION ENGINE</div>
+                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img">
                     </div>
+                    <div class="spec-title">DINOv2 + ALIKED</div>
+                    <div class="spec-vendor">Meta Fundamental AI Research (FAIR)</div>
+                    <div class="spec-desc">Self-supervised 기반의 비전 트랜스포머(DINOv2)와 ALIKED, LightGlue를 파이프라인으로 결합하여 이미지의 픽셀 특징점을 정밀하게 추출하고 DB와 초정밀 매칭을 수행합니다.</div>
                 </div>
-            </div>
 
-            <div class="arch-connector">
-                <div class="connector-line"></div>
-                <div class="connector-label">메타데이터 및 벡터 인덱스 대조 검색</div>
-                <div class="connector-line"></div>
-            </div>
-
-            <!-- Layer 4: DB -->
-            <div class="arch-layer">
-                <h3>📚 미술관 DB</h3>
-                <div class="arch-box" style="text-align: center; border: none; background: transparent;">
-                    작품 이미지 벡터 인덱스 및 상세 메타데이터 (FAISS)
+                <!-- Vision: SAM 2.1 -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">VISION ENGINE</div>
+                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img">
+                    </div>
+                    <div class="spec-title">SAM 2.1</div>
+                    <div class="spec-vendor">Segment Anything Model 2 (Meta)</div>
+                    <div class="spec-desc">식별된 작품의 픽셀 단위 실시간 정밀 실루엣 마스킹을 수행합니다. 비정형 조각상이나 설치 미술의 윤곽선을 완벽하게 추출하여 AR 하이라이트 UI의 렌더링 폴리곤 데이터를 제공합니다.</div>
                 </div>
-            </div>
 
+                <!-- Tracking: YOLOv10n-hands -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">INTERACTION</div>
+                        <img src="https://cdn.simpleicons.org/google/ffffff" alt="Google" class="spec-logo-img">
+                    </div>
+                    <div class="spec-title">YOLOv10n-hands</div>
+                    <div class="spec-vendor">Ultralytics / Google MediaPipe</div>
+                    <div class="spec-desc">관람객의 손 위치를 빠르게 찾고 21개의 손가락 관절을 추적합니다. 엄지와 검지를 맞부딪히는 '핀치' 동작을 인식하여 허공의 AR 인터페이스를 제어합니다.</div>
+                </div>
+
+                <!-- Audio: sherpa-onnx -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">AUDIO PIPELINE</div>
+                        <img src="https://cdn.simpleicons.org/onnx/ffffff" alt="ONNX" class="spec-logo-img">
+                    </div>
+                    <div class="spec-title">sherpa-onnx</div>
+                    <div class="spec-vendor">Next-gen Kaldi / ONNX Runtime</div>
+                    <div class="spec-desc">온디바이스 환경에서 웨이크워드를 감지하고, 관람객의 이어지는 음성 질문을 실시간으로 텍스트로 변환(Streaming STT)합니다.</div>
+                </div>
+
+                <!-- AI: Gemini API -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">LLM DOCENT</div>
+                        <img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Google Gemini" class="spec-logo-img">
+                    </div>
+                    <div class="spec-title">Google Gemini API</div>
+                    <div class="spec-vendor">Google DeepMind</div>
+                    <div class="spec-desc">질문 의도를 파악하고 전문 큐레이터 수준의 통찰력 있는 해설을 즉석에서 생성합니다. 다음 예상 질문까지 추론하여 제안합니다.</div>
+                </div>
+
+                <!-- Audio: Supertonic 3 -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">AUDIO PIPELINE</div>
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" class="spec-logo"><path d="M12 2L12 22M17 7L17 17M7 7L7 17M22 10L22 14M2 10L2 14"></path></svg>
+                    </div>
+                    <div class="spec-title">Supertonic 3</div>
+                    <div class="spec-vendor">Speech Synthesis (TTS)</div>
+                    <div class="spec-desc">Gemini가 생성한 텍스트 해설을 실시간으로 지연 없이 인간의 억양과 감정이 담긴 자연스러운 음성으로 합성합니다.</div>
+                </div>
+
+                <!-- DB: FAISS -->
+                <div class="spec-card">
+                    <div class="spec-header">
+                        <div class="spec-badge">DATABASE</div>
+                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img">
+                    </div>
+                    <div class="spec-title">FAISS Indexing</div>
+                    <div class="spec-vendor">Facebook AI Similarity Search</div>
+                    <div class="spec-desc">작품의 특징점 임베딩 벡터를 통해 고속 유사도 검색을 수행, 현재 비추는 작품을 즉각 매칭하는 로컬 DB입니다.</div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <!-- AI Models Detail -->
-        <p class="section-subtitle" style="margin-top: 4rem;">CORE AI MODELS &amp; ALGORITHMS</p>
-        <div class="b-grid">
-            <div class="b-card">
-                <div class="b-badge">YOLOE-26s</div>
-                <div class="b-card-title">작품 후보군 빠른 감지</div>
-                <div class="b-card-desc">카메라 시야 중에서 예술품이 있을 만한 후보 위치를 0.01초 만에 찾아냅니다. 처리 속도 향상의 핵심입니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">DINOv2 + ALIKED + LightGlue</div>
-                <div class="b-card-title">정밀 특징점 추출 및 매칭</div>
-                <div class="b-card-desc">이미지의 픽셀 특징을 깊이 있게 이해하여 DB의 원본과 초정밀 비교합니다. 정확한 작품을 매칭해냅니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">SAM 2.1</div>
-                <div class="b-card-title">실시간 정밀 실루엣 추출</div>
-                <div class="b-card-desc">사각 액자뿐만 아니라 삐뚤빼뚤한 조각상의 실제 윤곽선을 완벽하게 따서 AR 화면에 덧씌워 줍니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">YOLOv10n-hands + MediaPipe</div>
-                <div class="b-card-title">정교한 손 관절 추적</div>
-                <div class="b-card-desc">손 위치를 빠르게 찾고 21개 관절을 추적합니다. 엄지와 검지를 맞부딪히는 '핀치' 동작을 클릭으로 인식합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">sherpa-onnx Zipformer</div>
-                <div class="b-card-title">호출어 및 음성 인식</div>
-                <div class="b-card-desc">"Hey KUNST" 호출을 감지하고 이어지는 사용자의 음성 질문을 실시간으로 텍스트로 변환(STT)합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">Gemini API</div>
-                <div class="b-card-title">의도 파악 및 해설 생성</div>
-                <div class="b-card-desc">모호한 질문에도 문맥을 파악하고 전문 큐레이터처럼 정확하고 통찰력 있는 답변을 즉석에서 생성합니다.</div>
-            </div>
-            <div class="b-card">
-                <div class="b-badge">Supertonic 3</div>
-                <div class="b-card-title">자연스러운 음성 합성</div>
-                <div class="b-card-desc">생성된 텍스트 해설을 실시간보다 훨씬 빠른 속도로 자연스러운 사람의 목소리로 변환(TTS)하여 들려줍니다.</div>
+    <!-- 4. SYSTEM ARCHITECTURE (DATA FLOW) -->
+    <section class="arch-section" id="arch-wrap">
+        <h2 class="section-title arch-title" style="padding: 4rem 4rem 0 4rem; margin-bottom: 0;">DATA <span class="highlight">ARCHITECTURE</span></h2>
+        
+        <div class="horizontal-overflow">
+            <div class="horizontal-track" id="arch-track">
+                
+                <!-- LAYER 1 -->
+                <div class="h-panel">
+                    <div class="arch-layer">
+                        <h3>L1. USER INTERFACE</h3>
+                        <div class="arch-desc">관람객 물리 계층 (Physical Layer)</div>
+                        <div class="arch-data-flow">
+                            <div class="flow-item">Input: 시야(시각), 음성 질문(청각), 핀치 제스처(운동)</div>
+                            <div class="flow-item">Output: 증강현실 UI, 해설 음성 피드백</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LAYER 2 -->
+                <div class="h-panel">
+                    <div class="arch-layer">
+                        <h3>L2. KUNST CLIENT</h3>
+                        <div class="arch-desc">스마트 글래스 에지 컴퓨팅 (Edge Device)</div>
+                        <div class="arch-grid-2" style="margin-top: 1.5rem;">
+                            <div class="arch-box">
+                                <strong>Sensors</strong><br>
+                                광각 듀얼 카메라 스트림 수집<br>지향성 마이크로폰 음성 수집
+                            </div>
+                            <div class="arch-box">
+                                <strong>Display</strong><br>
+                                투명 광학계(Waveguide) 렌더링<br>윤곽선 UI 및 플로팅 텍스트
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LAYER 3 -->
+                <div class="h-panel h-panel-wide">
+                    <div class="arch-layer">
+                        <h3>L3. GPU SERVER CLUSTER</h3>
+                        <div class="arch-desc">분산 인퍼런스 서버 (Vision &amp; Audio Processing)</div>
+                        <div class="arch-grid-2" style="margin-top: 1.5rem;">
+                            <div class="arch-engine">
+                                <div class="engine-title">Vision Pipeline (병렬 처리)</div>
+                                <div class="engine-step">BBox Detection <span>[YOLOE]</span></div>
+                                <div class="engine-step">Feature Matching <span>[DINOv2]</span></div>
+                                <div class="engine-step">Segmentation <span>[SAM 2.1]</span></div>
+                                <div class="engine-step">Hand Tracking <span>[MediaPipe]</span></div>
+                            </div>
+                            <div class="arch-engine">
+                                <div class="engine-title">Docent Pipeline (비동기 처리)</div>
+                                <div class="engine-step">VAD &amp; STT <span>[sherpa-onnx]</span></div>
+                                <div class="engine-step">LLM Inference <span>[Gemini API]</span></div>
+                                <div class="engine-step">TTS Synthesis <span>[Supertonic 3]</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LAYER 4 -->
+                <div class="h-panel">
+                    <div class="arch-layer">
+                        <h3>L4. LOCAL DATABASE</h3>
+                        <div class="arch-desc">미술관 에셋 스토리지 (Storage Layer)</div>
+                        <div class="arch-box highlight-box" style="margin-top: 1.5rem;">
+                            <strong>FAISS Vector Store</strong><br>
+                            - 1,000+ 작품 특징점 임베딩 벡터<br>
+                            - 텍스트 메타데이터 및 도슨트 원고 DB
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -237,7 +246,7 @@
         <div class="footer-content">
             <div class="footer-brand">KUNST</div>
             <div class="footer-info">
-                <p>CHID - Augmented Reality Docent Glasses</p>
+                <p>Advanced Multimodal XR Docent System</p>
                 <p>&copy; 2025 Eunjun Choi. All rights reserved.</p>
             </div>
         </div>
