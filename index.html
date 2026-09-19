@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Syncopate:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 </head>
 <body class="index-page">
     <div class="cursor"></div>
@@ -23,6 +24,51 @@
             <a href="https://chid.kr/" target="_blank">DESIGNER</a>
         </div>
     </nav>
+
+    <!-- Artworks on Main Page -->
+    <div class="artwork-container" id="artwork-statue" data-name="statue">
+        <div class="artwork-outline"></div>
+        <img src="assets/main/statue.svg" alt="Statue" class="artwork-img">
+        <div class="glass-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+    </div>
+
+    <div class="artwork-container" id="artwork-monalisa" data-name="monalisa">
+        <div class="artwork-outline"></div>
+        <img src="assets/main/monalisa.svg" alt="Monalisa" class="artwork-img">
+        <div class="glass-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+    </div>
+
+    <!-- Artwork Info Popup -->
+    <div class="popup-overlay" id="artwork-popup">
+        <div class="info-card glass-panel">
+            <div class="card-media">
+                <img id="popup-image" alt="Artwork" src="">
+            </div>
+            <button class="icon-button card-close" type="button" aria-label="닫기" id="popup-close">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7 L17 17 M17 7 L7 17"/></svg>
+            </button>
+            <div class="card-body">
+                <h2 class="card-title" id="popup-title">Title</h2>
+                <div class="card-facts" id="popup-facts"></div>
+                <p class="card-summary" id="popup-summary">Summary</p>
+            </div>
+            <div class="ask">
+                <div class="ask-head">
+                    <div class="ask-title">Ask <b>KUNST</b></div>
+                    <button class="icon-button mic-button" type="button" aria-label="질문하기">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5 a6.5 6.5 0 0 0 13 0 M12 18 V21"/></svg>
+                    </button>
+                </div>
+                <div class="ask-hint"><span class="ear-dot"></span><span>“Hey KUNST”라고 부르거나 질문을 골라 보세요</span></div>
+                <div class="suggested" id="popup-questions">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-logo-container">
