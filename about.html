@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Syncopate:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Load a modern sans-serif for Korean (Pretendard) as alternative to generic fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
@@ -22,51 +24,103 @@
             <img src="assets/main/KUNST_main logo.svg" alt="KUNST">
         </a>
         <div class="nav-links">
-            <a href="about.html">ARCHITECTURE</a>
+            <a href="index.html">MAIN</a>
             <a href="https://chid.kr/" target="_blank">DESIGNER</a>
         </div>
     </nav>
 
     <!-- 1. TECHNICAL HERO -->
-    <section class="hero-section text-heavy">
-        <div class="hero-content" style="max-width: 1200px;">
-            <div class="eyebrow-tech">SYSTEM SPECIFICATION &amp; BACKGROUND</div>
-            <h1 class="hero-headline">KUNST:<br>MULTIMODAL AR<br>DOCENT SYSTEM.</h1>
+    <section class="hero-section text-heavy split-hero">
+        <div class="hero-content">
+            <div class="eyebrow-tech">SYSTEM SPECIFICATION &amp; VISION</div>
+            <h1 class="hero-headline">KUNST<br>AI DOCENT<br>SYSTEM.</h1>
+        </div>
+        <div class="hero-side">
             <p class="hero-subtext tech-subtext">
-                KUNST는 수동적인 관람 형태를 능동적인 예술 비평으로 전환하기 위해 설계된 차세대 혼합현실(XR) 시스템입니다. 실시간 컴퓨터 비전, 분산 GPU 연산, 그리고 대화형 LLM을 결합하여 관람객과 작품 사이의 장벽을 허물고 몰입형 상호작용을 제공합니다.
+                보고, 선택하고, 질문하는<br>혼합현실 AI 도슨트
             </p>
         </div>
     </section>
 
-    <!-- 2. PROBLEM STATEMENT -->
-    <section class="manifesto-section">
-        <h2 class="section-title text-center" style="text-align: center;">PROBLEM <span class="highlight">STATEMENT</span></h2>
-        
-        <div class="m-cards-grid">
-            <div class="m-card">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
-                <h3>01 / HUMAN BOTTLENECK</h3>
-                <p>전문 큐레이터 동행 투어는 정해진 시간과 한정된 인원이라는 물리적 제약을 지닙니다. 관람객들은 작은 작품 하나를 보기 위해 그룹으로 몰려들어야 하며, 이는 필연적으로 <strong>시야의 제한과 몰입의 붕괴</strong>를 초래합니다. 또한, 일방적으로 쏟아지는 방대한 해설을 수동적으로 들어야 하므로 관람객의 육체적, 인지적 피로가 빠르게 누적됩니다.</p>
+    <!-- 2. OVERVIEW -->
+    <section class="overview-section">
+        <div class="overview-container grid-2-asymmetric">
+            <div class="overview-left">
+                <h2 class="section-title">THE<br>VISION.</h2>
+                <div class="accent-line"></div>
             </div>
-            
-            <div class="m-card">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
-                <h3>02 / ANALOG FRICTION</h3>
-                <p>차선책으로 등장한 오디오 디바이스 대여 서비스 역시 근본적인 해결책이 아닙니다. 철저히 선형적으로 녹음된 음성본에 의존하며, 작품 옆에 붙은 번호를 찾아 기기에 입력하거나 QR 코드를 스캔해야 합니다. 이러한 <strong>단절되고 아날로그적인 상호작용</strong>은 작품 감상의 흐름을 끊고 시선을 분산시킵니다.</p>
-            </div>
-            
-            <div class="m-card highlight-card">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-                <h3>03 / THE XR PARADIGM</h3>
-                <p>사람들의 문화 생활이 <strong>Extended Reality(XR)</strong> 등 차세대 기술과 융합되는 흐름에 발맞춰 KUNST는 모든 마찰을 제거합니다. 관람객의 시선이 머무는 곳이 곧 상호작용의 시작입니다. 작품을 바라보며 허공에 핀치(Pinch) 제스처를 취하는 것만으로, 맥락을 완벽히 이해하는 나만의 실시간 쌍방향 AI 큐레이팅이 시작됩니다.</p>
+            <div class="overview-right">
+                <p class="lead-text">
+                    전문 도슨트는 시간·장소·인원에 묶여 있고, 오디오 가이드는 정해진 설명을 일방적으로 재생할 뿐이라, 관람객은 작품에서 눈을 떼야 하고 떠오른 궁금증은 답을 얻지 못한 채 남습니다.
+                </p>
+                <p class="lead-text highlight-text">
+                    KUNST는 스마트폰도 안내문도 없이,<br>작품에서 눈을 떼지 않고 보고·고르고·질문하는 감상을 AI로 구현합니다.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- 3. CORE ALGORITHMS (HORIZONTAL HIGHLIGHT) -->
+    <!-- 3. THE 3 PILLARS -->
+    <section class="pillars-section">
+        <div class="pillars-grid">
+            <!-- Pillar 1 -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-num">01</div>
+                    <h3 class="pillar-title">보는 순간 인식</h3>
+                </div>
+                <div class="pillar-desc">
+                    YOLOE가 작품 후보를 찾고 DINOv2 임베딩과 ALIKED·LightGlue 매칭으로 작품을 식별·재검증하며, SAM 2.1이 윤곽을 픽셀 단위로 분할해 작품 위에 AR 레이어를 겹칩니다.
+                </div>
+                <div class="pillar-tags">
+                    <span>YOLOE</span>
+                    <span>DINOv2</span>
+                    <span>ALIKED</span>
+                    <span>LightGlue</span>
+                    <span>SAM 2.1</span>
+                </div>
+            </div>
+            
+            <!-- Pillar 2 -->
+            <div class="pillar-card offset-card">
+                <div class="pillar-header">
+                    <div class="pillar-num">02</div>
+                    <h3 class="pillar-title">손끝으로 선택</h3>
+                </div>
+                <div class="pillar-desc">
+                    YOLOv10n·MediaPipe가 손 관절을 추적해 컨트롤러 없이 핀치 한 번으로 작품을 고르고, 손이 작품을 가려도 이전 프레임으로 윤곽을 복원해 AR이 흔들리지 않습니다.
+                </div>
+                <div class="pillar-tags">
+                    <span>YOLOv10n</span>
+                    <span>MediaPipe</span>
+                    <span>OneEuro</span>
+                </div>
+            </div>
+            
+            <!-- Pillar 3 -->
+            <div class="pillar-card offset-card-more">
+                <div class="pillar-header">
+                    <div class="pillar-num">03</div>
+                    <h3 class="pillar-title">묻는 즉시 답변</h3>
+                </div>
+                <div class="pillar-desc">
+                    온디바이스 sherpa-onnx가 질문을 인식하고, Gemini가 작품 DB와 Google 검색 근거로 답해 Supertonic 음성과 자막으로 함께 전합니다. 해설·추천 질문은 등록 시 1회만 생성해 비용을 줄였고, 모든 추론을 독립 프로세스로 분리해 글라스는 촬영·표시만, 연산은 엣지 서버가 맡는 AR 글라스 구조로 확장됩니다.
+                </div>
+                <div class="pillar-tags">
+                    <span>sherpa-onnx</span>
+                    <span>Gemini API</span>
+                    <span>Supertonic 3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. CORE ALGORITHMS -->
     <section class="models-section" id="models-wrap">
-        <h2 class="section-title text-center" style="text-align: center;">CORE <span class="highlight">ALGORITHMS</span></h2>
-        <p class="section-desc" style="margin: 0 auto 4rem auto; text-align: center;">KUNST 시스템의 두뇌 역할을 하는 오픈소스 및 상용 AI 모델 파이프라인 명세서입니다.</p>
+        <div class="models-header-container">
+            <h2 class="section-title text-center" style="text-align: center;">CORE <span class="highlight">ALGORITHMS</span></h2>
+            <p class="section-desc" style="margin: 0 auto 4rem auto; text-align: center;">KUNST 시스템의 두뇌 역할을 하는 오픈소스 및 상용 AI 모델 파이프라인 명세서입니다.</p>
+        </div>
 
         <div class="models-overflow">
             <div class="models-track" id="models-track">
@@ -165,80 +219,77 @@
         </div>
     </section>
 
-    <!-- 4. SYSTEM ARCHITECTURE (DATA FLOW) -->
-    <section class="arch-section" id="arch-wrap">
-        <h2 class="section-title arch-title" style="padding: 4rem 4rem 0 4rem; margin-bottom: 0;">DATA <span class="highlight">ARCHITECTURE</span></h2>
-        
-        <div class="horizontal-overflow">
-            <div class="horizontal-track" id="arch-track">
-                
-                <!-- LAYER 1 -->
-                <div class="h-panel">
-                    <div class="arch-layer">
-                        <h3>L1. USER INTERFACE</h3>
-                        <div class="arch-desc">관람객 물리 계층 (Physical Layer)</div>
-                        <div class="arch-data-flow">
-                            <div class="flow-item">Input: 시야(시각), 음성 질문(청각), 핀치 제스처(운동)</div>
-                            <div class="flow-item">Output: 증강현실 UI, 해설 음성 피드백</div>
-                        </div>
+    <!-- 5. DEEP DIVE: ARCHITECTURE & INTERACTION -->
+    <section class="deep-dive-section">
+        <div class="deep-dive-header">
+            <h2 class="section-title">DEEP <span class="highlight">DIVE</span></h2>
+            <div class="accent-line"></div>
+        </div>
+
+        <div class="feature-rows">
+            
+            <!-- Feature 1 -->
+            <div class="feature-row">
+                <div class="feature-number">01</div>
+                <div class="feature-content">
+                    <h3 class="feature-headline">시야부터 답변까지, 멈추지 않는 병렬 처리 아키텍처</h3>
+                    <div class="feature-body">
+                        <p>KUNST는 여러 개의 무거운 AI 모델을 동시에 실시간으로 구동합니다. 화면이 끊기지 않도록 고비용 연산을 모두 화면 처리 흐름에서 분리했습니다.</p>
+                        <p>손 추적은 독립 프로세스에서, 작품 인식과 윤곽선 추출은 각각 별도의 병렬 루프에서, 음성 질의응답은 별도의 파이프라인에서 처리됩니다. 메인 루프는 이 결과들만 모아 AR 화면으로 합성합니다. 또한 실행 시 모든 모델을 미리 한 번씩 워밍업하여 첫 인식에서 생기는 멈춤도 없앴습니다.</p>
                     </div>
                 </div>
-                
-                <!-- LAYER 2 -->
-                <div class="h-panel">
-                    <div class="arch-layer">
-                        <h3>L2. KUNST CLIENT</h3>
-                        <div class="arch-desc">스마트 글래스 에지 컴퓨팅 (Edge Device)</div>
-                        <div class="arch-grid-2" style="margin-top: 1.5rem;">
-                            <div class="arch-box">
-                                <strong>Sensors</strong><br>
-                                광각 듀얼 카메라 스트림 수집<br>지향성 마이크로폰 음성 수집
-                            </div>
-                            <div class="arch-box">
-                                <strong>Display</strong><br>
-                                투명 광학계(Waveguide) 렌더링<br>윤곽선 UI 및 플로팅 텍스트
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- LAYER 3 -->
-                <div class="h-panel h-panel-wide">
-                    <div class="arch-layer">
-                        <h3>L3. GPU SERVER CLUSTER</h3>
-                        <div class="arch-desc">분산 인퍼런스 서버 (Vision &amp; Audio Processing)</div>
-                        <div class="arch-grid-2" style="margin-top: 1.5rem;">
-                            <div class="arch-engine">
-                                <div class="engine-title">Vision Pipeline (병렬 처리)</div>
-                                <div class="engine-step">BBox Detection <span>[YOLOE]</span></div>
-                                <div class="engine-step">Feature Matching <span>[DINOv2]</span></div>
-                                <div class="engine-step">Segmentation <span>[SAM 2.1]</span></div>
-                                <div class="engine-step">Hand Tracking <span>[MediaPipe]</span></div>
-                            </div>
-                            <div class="arch-engine">
-                                <div class="engine-title">Docent Pipeline (비동기 처리)</div>
-                                <div class="engine-step">VAD &amp; STT <span>[sherpa-onnx]</span></div>
-                                <div class="engine-step">LLM Inference <span>[Gemini API]</span></div>
-                                <div class="engine-step">TTS Synthesis <span>[Supertonic 3]</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- LAYER 4 -->
-                <div class="h-panel">
-                    <div class="arch-layer">
-                        <h3>L4. LOCAL DATABASE</h3>
-                        <div class="arch-desc">미술관 에셋 스토리지 (Storage Layer)</div>
-                        <div class="arch-box highlight-box" style="margin-top: 1.5rem;">
-                            <strong>FAISS Vector Store</strong><br>
-                            - 1,000+ 작품 특징점 임베딩 벡터<br>
-                            - 텍스트 메타데이터 및 도슨트 원고 DB
-                        </div>
-                    </div>
-                </div>
-                
             </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-row reverse-row">
+                <div class="feature-number">02</div>
+                <div class="feature-content">
+                    <h3 class="feature-headline">손끝이 곧 인터페이스, 실시간 핸드 트래킹</h3>
+                    <div class="feature-body">
+                        <p>KUNST는 관람객의 1인칭 시야 영상에서 손의 위치와 관절을 실시간으로 추적합니다. GPU 기반 경량 탐지 모델 YOLOv10n이 손을 빠르게 찾아내고, MediaPipe가 손가락 관절(랜드마크)을 정밀하게 추출합니다.</p>
+                        <p>손 추적 연산은 메인 프로그램과 분리된 독립 프로세스에서 공유 메모리로 영상을 주고받으며 처리되므로, 화면이 느려지지 않습니다. 사람은 시각과 촉각, 운동감각이 함께 작동할 때 대상에 더 깊이 몰입합니다. 이에 KUNST는 관람객이 작품을 눈으로 바라보며 직접 손을 뻗어 고르는, '보는 행위'와 '고르는 행위'가 하나로 이어지는 상호작용을 설계했습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-row">
+                <div class="feature-number">03</div>
+                <div class="feature-content">
+                    <h3 class="feature-headline">Pinch 제스처 기반의 정밀 작품 선택</h3>
+                    <div class="feature-body">
+                        <p>가장 직관적인 입력 신호는 엄지와 검지 끝이 맞닿는 핀치 제스처입니다. 두 손가락이 실제로 닿는 감각이 그대로 '클릭'의 촉각 피드백이 되기 때문입니다.</p>
+                        <p>관람객이 Meta SAM 2.1이 픽셀 단위로 추출한 작품 윤곽선 위에서 핀치를 취하면 해당 작품이 선택됩니다. 손가락 끝 좌표는 OneEuro 필터로 떨림과 노이즈를 걸러내고, 두 손가락 사이의 거리 비율과 3D 굽힘 각도를 함께 계산해 핀치와 주먹 쥐기를 구분합니다.</p>
+                        <p>또한 히스테리시스 특성으로 선택 신호가 경계에서 깜빡이는 현상을 막아 의도한 순간에만 정확히 선택이 이루어집니다. 손이 작품을 가리더라도 이전 프레임의 윤곽선으로 빈 곳을 메우는 가림 보정 덕분에 윤곽선이 끊기지 않습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-row reverse-row">
+                <div class="feature-number">04</div>
+                <div class="feature-content">
+                    <h3 class="feature-headline">작품 옆에 떠오르는 AR 정보 카드 &amp; 로컬 데이터베이스</h3>
+                    <div class="feature-body">
+                        <p>작품이 선택되면 실제 작품 바로 옆에 AR 플로팅 카드가 나타나, 로컬 데이터베이스에 등록된 작품 이미지와 정보를 보여줍니다. 작품 인식은 세 단계로 이루어집니다. YOLOE가 화면에서 작품 후보 영역을 찾고, DINOv2가 시각적 특징을 추출해 데이터베이스와 비교하며, ALIKED와 LightGlue가 세부 특징점을 대조해 최종 확정합니다. 등록된 작품 데이터는 GPU 메모리에 미리 올려두어 인식 속도를 높였고, 인식 중인 작품도 주기적으로 재검증해 오인식을 줄였습니다.</p>
+                        <p>인식 대상과 작품 정보는 전용 프로그램 KUNST Studio를 통해 전시장이 직접 등록하고 관리합니다. 불특정한 '예술작품'을 범용으로 인식하도록 하면, 전시와 무관한 조형물이나 포스터까지 작품으로 오인할 수 있습니다. 반대로 인식할 작품을 사전에 지정하면 AI는 등록된 작품만 구분하면 되므로 정확도와 속도가 함께 올라갑니다. 또한 작품에 대한 가장 정확하고 양질의 정보는 전시를 기획한 전시장이 가지고 있습니다. 그래서 KUNST는 인식 대상과 정보를 전시장이 직접 큐레이팅하는 로컬 데이터베이스 방식을 택했습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-row">
+                <div class="feature-number">05</div>
+                <div class="feature-content">
+                    <h3 class="feature-headline">언제든 묻고 답하는 양방향 AI 도슨트</h3>
+                    <div class="feature-body">
+                        <p>관람객마다 배경지식도, 궁금한 지점도 다릅니다. 정해진 해설만으로는 이 다양한 질문에 모두 답할 수 없습니다. KUNST에서는 "Hey KUNST"라고 부르거나 마이크 버튼을 핀치하면 바로 질문할 수 있습니다.</p>
+                        <p>호출어는 기기 안에서 로컬로 감지되고, 질문 음성은 텍스트로 변환되어 Gemini 기반 AI 도슨트에게 전달됩니다. AI는 이전 대화의 맥락과 구글 검색 결과를 근거로 답변을 생성합니다.</p>
+                        <p>답변은 스트리밍으로 도착하는 즉시 호흡 단위의 문장으로 나뉘어 음성으로 합성되고, 음성 길이에 맞춰 자막이 함께 표시됩니다. 덕분에 관람객은 답변 전체를 기다리지 않고 바로 듣고 읽을 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
