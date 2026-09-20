@@ -17,6 +17,7 @@ body.about-page,
 .pillars-section,
 .models-section,
 .deep-dive-section,
+.cta-section,
 .footer {
     background-image:
         linear-gradient(rgba(255, 115, 0, 0.05) 1px, transparent 1px),
@@ -378,6 +379,67 @@ body.about-page { background-position: 0 80px; }
     margin-bottom: 0;
 }
 
+/* Screenshots & the architecture diagram */
+.feature-figure {
+    margin: 3rem 0 0;
+    border: 2px solid #333;
+    background: #0d0d0d;
+}
+.feature-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.feature-figure figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding: 0.9rem 1.2rem;
+    border-top: 2px solid #333;
+}
+
+/* The three engines, as the diagram names them */
+.engine-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* all four engines on one row at desktop, like the diagram */
+    gap: 2rem;
+    margin: 3rem 0 0;
+}
+.engine-item dt {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--point-color);
+    padding-bottom: 0.9rem;
+    margin-bottom: 0.9rem;
+    border-bottom: 2px solid #333;
+}
+.engine-item dd {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a0a0a0;
+    word-break: keep-all;
+}
+.engine-item dd span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+/* Download */
+.cta-section {
+    padding: 10vw;
+    text-align: center;
+    border-bottom: 4px solid var(--text-muted);
+    background-color: var(--bg-color);
+}
+.cta-section .section-desc {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Footer */
 .footer {
     padding: 8rem 10vw;
@@ -442,8 +504,11 @@ body.about-page { background-position: 0 80px; }
     .hero-side {
         margin-top: 4rem;
     }
-    .overview-section, .pillars-section, .models-section, .deep-dive-section {
+    .overview-section, .pillars-section, .models-section, .deep-dive-section, .cta-section {
         padding: 6rem 5vw;
+    }
+    .feature-figure, .engine-list {
+        margin-top: 2rem;
     }
     .feature-row, .feature-row.reverse-row {
         grid-template-columns: 1fr;
