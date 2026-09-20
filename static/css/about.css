@@ -9,6 +9,23 @@ body.about-page {
     font-family: 'Pretendard', 'Syncopate', sans-serif;
 }
 
+/* AR Scanning Grid Background (same as index). Drawn on each section over its own
+   background-color: every section here is opaque, so an underlay on body never shows. */
+body.about-page,
+.hero-section,
+.overview-section,
+.pillars-section,
+.models-section,
+.deep-dive-section,
+.footer {
+    background-image:
+        linear-gradient(rgba(255, 115, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 115, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+/* body shows through in its 80px top padding only; offset so its lines meet the hero's */
+body.about-page { background-position: 0 80px; }
+
 /* Base Utility Classes */
 .section-title {
     font-family: var(--font-display);
@@ -364,7 +381,7 @@ body.about-page {
 /* Footer */
 .footer {
     padding: 8rem 10vw;
-    background: #0d0d0d;
+    background-color: #0d0d0d; /* longhand: the shorthand would wipe the grid background-image */
 }
 .footer-content {
     display: flex;
