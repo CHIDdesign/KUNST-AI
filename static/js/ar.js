@@ -11,10 +11,15 @@ const canvas = document.createElement('canvas');
 canvas.id = 'ar-canvas';
 document.body.append(crossX, crossY, coordBox, canvas);
 const ctx = canvas.getContext('2d');
+let shapes = [];
 
+let dpr = 1;
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    dpr = window.devicePixelRatio || 1; // draw at device resolution so the line stays crisp, not upscaled
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    shapes.forEach(s => { s.to = null; }); // artwork moved with the viewport: re-project its contour
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
@@ -59,9 +64,22 @@ function resamplePath(path, numPoints) {
 }
 
 const N = 300; // points per outline: drawn loops and traced contours share it so one can slide onto the other
-const BLINK = 450, MORPH = 900;
+const BLINK = 900, FADE = 380, MORPH = 900; // two soft blinks, then: nothing under the loop -> quick fade, artwork -> morph
+const STEP = 5; // px between captured points: dense enough that the stroke follows the hand
 const WHITE = [244, 244, 244], ORANGE = [255, 115, 0];
 const lerp = (a, b, t) => a + (b - a) * t;
+// Closed-loop 1-2-1 averaging: takes the hand jitter and the corner at the closing point out of a drawn loop
+function smoothLoop(pts, passes) {
+    for (let n = 0; n < passes; n++) {
+        pts = pts.map((p, i) => {
+            const a = pts[(i || pts.length) - 1], b = pts[(i + 1) % pts.length];
+            return { x: (a.x + 2 * p.x + b.x) / 4, y: (a.y + 2 * p.y + b.y) / 4 };
+        });
+    }
+    return pts;
+}
+// self-check: smoothing must keep the point count (the morph pairs drawn[i] with contour[i]) and only pull corners inward
+console.assert(smoothLoop([{x:0,y:0},{x:4,y:0},{x:4,y:4},{x:0,y:4}], 1).every((p, i, a) => a.length === 4 && p.x >= 0 && p.x <= 4 && p.x !== 2), 'smoothLoop');
 const area = pts => pts.reduce((s, p, i) => s + p.x * pts[(i + 1) % pts.length].y - pts[(i + 1) % pts.length].x * p.y, 0);
 
 // Silhouette of an artwork from its SVG's alpha: outer contour + interior samples, in 0..1 image coords
@@ -131,7 +149,7 @@ artworks.forEach(container => {
 let isDrawing = false;
 let justDrew = false; // a finished loop must not also count as a click on the artwork under it
 let currentPath = [];
-let shapes = [];
+let tip = null; // the pointer itself: the live stroke trails it and is drawn up to it
 
 function startDrawing(e, x, y) {
     // No drawing from links/buttons or while the popup is open
@@ -139,11 +157,14 @@ function startDrawing(e, x, y) {
     isDrawing = true;
     justDrew = false;
     currentPath = [{x, y}];
+    tip = {x, y};
 }
 
 function extendDrawing(x, y) {
+    tip = {x, y};
     const lastPoint = currentPath[currentPath.length - 1];
-    if (Math.hypot(x - lastPoint.x, y - lastPoint.y) > 35) currentPath.push({x, y});
+    // Lazy brush: each captured point only goes half-way to the pointer, which averages the hand jitter out of the stroke
+    if (Math.hypot(x - lastPoint.x, y - lastPoint.y) > STEP) currentPath.push({ x: lerp(lastPoint.x, x, 0.5), y: lerp(lastPoint.y, y, 0.5) });
 }
 
 document.addEventListener('mousedown', (e) => startDrawing(e, e.clientX, e.clientY));
@@ -156,7 +177,7 @@ document.addEventListener('mousemove', (e) => {
 
     // Coords update
     coordBox.style.transform = `translate3d(${e.clientX + 20}px, ${e.clientY + 20}px, 0)`;
-    coordBox.innerText = `[ SCANNING... X:${e.clientX} Y:${e.clientY} ]`;
+    coordBox.textContent = `[ SCANNING... X:${e.clientX} Y:${e.clientY} ]`;
 
     if (isDrawing) extendDrawing(e.clientX, e.clientY);
 });
@@ -185,18 +206,21 @@ document.addEventListener('touchend', (e) => {
 });
 
 function saveShape() {
-    if (currentPath.length > 2) {
+    // A click with a few px of hand wobble is still a click, not a loop
+    const drawn = currentPath.reduce((len, p, i) => len + (i ? Math.hypot(p.x - currentPath[i - 1].x, p.y - currentPath[i - 1].y) : 0), 0);
+    if (currentPath.length > 2 && drawn > 60) {
         justDrew = true;
-        const path = resamplePath(currentPath, N);
+        const path = smoothLoop(resamplePath(currentPath, N), 10);
         const loop = new Path2D();
         path.forEach(p => loop.lineTo(p.x, p.y));
         // An artwork is recognised once at least half of its silhouette sits inside the loop
+        // (isPointInPath takes the point in canvas pixels but runs the path through the dpr transform)
         const hit = artworks.find(c => c.art &&
-            toScreen(c, c.art.inside).filter(p => ctx.isPointInPath(loop, p.x, p.y)).length >= c.art.inside.length / 2);
+            toScreen(c, c.art.inside).filter(p => ctx.isPointInPath(loop, p.x * dpr, p.y * dpr)).length >= c.art.inside.length / 2);
         if (hit) {
             activateArtwork(hit, path);
         } else {
-            shapes.push({ path: currentPath, createdAt: Date.now(), lifeTime: 2000, fadeTime: 1000 });
+            shapes.push({ path, createdAt: Date.now() });
         }
     }
     currentPath = [];
@@ -218,41 +242,45 @@ function activateArtwork(container, path) {
 }
 
 // Render Loop for Canvas
+let wasBusy = false;
 function renderCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(renderCanvas);
     const now = Date.now();
-    const pulse = 0.3 + 0.7 * (Math.sin(now * 0.01) + 1) / 2; // scanning pulse for free drawings
+    shapes = shapes.filter(s => s.container || now - s.createdAt < BLINK + FADE);
+    const busy = shapes.length > 0 || isDrawing;
+    if (!busy && !wasBusy) return; // idle: leave the (already clear) canvas alone
+    wasBusy = busy;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    shapes = shapes.filter(s => s.container || now - s.createdAt < s.lifeTime + s.fadeTime);
     for (const s of shapes) {
         const age = now - s.createdAt;
+        // Every closed loop first dims softly twice: 1 -> 0.3 -> 1 -> 0.3 -> 1
+        const blink = age < BLINK ? 0.5 - 0.5 * Math.cos(4 * Math.PI * age / BLINK) : 0;
         if (s.container) {
-            // One recognition blink, then the drawn line slides onto the artwork's contour and stays there
-            const to = toScreen(s.container, s.container.art.outline);
+            // ...then the drawn line slides onto the artwork's contour and stays there
+            const c = s.container;
+            const to = s.to || (s.to = toScreen(c, c.art.outline));
             const t = Math.min(1, Math.max(0, (age - BLINK) / MORPH));
             const e = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
-            const blink = age < BLINK ? Math.sin(Math.PI * age / BLINK) : 0;
-            if (t === 1) s.container.classList.add('active');
+            if (t === 1) c.classList.add('active');
 
             // Crossfade white -> orange while hovered or while its popup is open
-            const c = s.container;
             const hot = c.classList.contains('active') && (c.classList.contains('selected') || c.matches(':hover')) ? 1 : 0;
             s.hot += (hot - s.hot) * 0.15;
             const rgb = WHITE.map((v, i) => Math.round(lerp(v, ORANGE[i], s.hot))).join(',');
 
-            const pts = s.from.map((p, i) => ({ x: lerp(p.x, to[i].x, e), y: lerp(p.y, to[i].y, e) }));
-            drawPath(pts, true, `rgba(${rgb},${0.85 + 0.15 * blink})`, `rgba(${rgb},${0.08 + 0.06 * s.hot + 0.22 * blink})`, 3 + 3 * blink);
+            const pts = t === 0 ? s.from : s.from.map((p, i) => ({ x: lerp(p.x, to[i].x, e), y: lerp(p.y, to[i].y, e) }));
+            drawPath(pts, true, `rgba(${rgb},${1 - 0.7 * blink})`, `rgba(${rgb},${(0.08 + 0.06 * s.hot) * (1 - 0.7 * blink)})`, 3);
         } else {
-            const a = (age > s.lifeTime ? 1 - (age - s.lifeTime) / s.fadeTime : 1) * pulse;
+            // ...then, with nothing recognised under it, lets go quickly (ease-out)
+            const a = age < BLINK ? 1 - 0.7 * blink : (1 - (age - BLINK) / FADE) ** 2;
             drawPath(s.path, true, `rgba(244,244,244,${a})`, `rgba(244,244,244,${0.06 * a})`, 3);
         }
     }
 
     if (isDrawing && currentPath.length > 0) {
-        drawPath(currentPath, false, `rgba(244,244,244,${pulse})`, null, 3); // Open while drawing
+        drawPath(currentPath.concat(tip), false, 'rgba(244,244,244,0.95)', null, 3); // Open while drawing
     }
-
-    requestAnimationFrame(renderCanvas);
 }
 requestAnimationFrame(renderCanvas);
 
@@ -320,31 +348,32 @@ const popup = document.getElementById('artwork-popup');
 if (popup) {
     const infoCard = popup.querySelector('.info-card');
 
+    const photo = document.getElementById('popup-image');
+    const photoUrl = name => `assets/main/${name}.webp`; // photo sits next to the line-art svg, same name
+    artworks.forEach(c => { new Image().src = photoUrl(c.dataset.name); }); // warm the cache: first open is instant
+
     artworks.forEach(container => {
-        container.addEventListener('click', () => {
+        container.addEventListener('click', async () => {
             if (!container.classList.contains('active') || justDrew) return;
 
             const data = artworkData[container.dataset.name];
-            const photo = document.getElementById('popup-image');
-            photo.src = `assets/main/${container.dataset.name}.jpg`; // photo sits next to the line-art svg, same name
+            photo.src = photoUrl(container.dataset.name);
             photo.alt = data.title;
             document.getElementById('popup-title').innerText = data.title;
             document.getElementById('popup-facts').innerHTML = data.facts.map(fact => `<span>${fact}</span>`).join('');
             document.getElementById('popup-summary').innerText = data.summary;
             document.getElementById('popup-questions').innerHTML = data.questions.map(q => `<button class="chip" type="button">${q}</button>`).join('');
 
-            infoCard.dataset.art = container.dataset.name; // CSS widens the fuller card
+            // An <img> keeps painting its previous picture until the new one has loaded, so the card
+            // is only shown once the new photo is decoded: no flash of the last artwork
+            await photo.decode().catch(() => {});
 
             // Desktop: beside the artwork, on the side facing the page centre, kept inside the viewport.
-            // Mobile (<=768px): CSS centres the card.
-            if (window.innerWidth > 768) {
-                const r = container.getBoundingClientRect();
-                const cw = infoCard.offsetWidth;
-                const left = r.left < window.innerWidth / 2 ? r.right + 30 : r.left - cw - 30;
-                infoCard.style.left = `${Math.min(Math.max(16, left), window.innerWidth - cw - 16)}px`;
-            } else {
-                infoCard.style.left = '';
-            }
+            // Mobile (<=768px): CSS overrides `left` and centres the card.
+            const r = container.getBoundingClientRect();
+            const cw = infoCard.offsetWidth;
+            const left = r.left < window.innerWidth / 2 ? r.right + 30 : r.left - cw - 30;
+            infoCard.style.left = `${Math.min(Math.max(16, left), window.innerWidth - cw - 16) - 16}px`; // `left` is relative: the overlay's 16px padding is already in
 
             container.classList.add('selected'); // keeps it orange until the popup closes
             popup.classList.add('show');

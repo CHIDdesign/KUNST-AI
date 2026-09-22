@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KUNST - AR Docent Glasses</title>
+    <meta name="description" content="KUNST는 작품에서 눈을 떼지 않고 보고·고르고·질문하는 혼합현실 AI 도슨트입니다. 화면 위에 윤곽선을 그려 작품을 인식해 보세요.">
+    <meta name="theme-color" content="#080808">
+    <link rel="canonical" href="https://kunst.ai.kr/">
+    <meta property="og:title" content="KUNST - 혼합현실 AI 도슨트">
+    <meta property="og:description" content="보고, 선택하고, 질문하는 혼합현실 AI 도슨트.">
+    <meta property="og:image" content="https://kunst.ai.kr/assets/about/architecture.jpg">
+    <meta property="og:url" content="https://kunst.ai.kr/">
+    <meta property="og:type" content="website">
     <link rel="icon" type="image/svg+xml" href="assets/main/KUNST_favicon.svg">
-    <link rel="stylesheet" href="static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Syncopate:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Pretendard, dynamic subset: only the glyph ranges the page uses are downloaded, not the whole Korean font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 </head>
 <body class="index-page">
     <div class="cursor"></div>
@@ -21,14 +31,14 @@
         </a>
         <div class="nav-links">
             <a href="about.html">ABOUT KUNST</a>
-            <a href="https://chid.kr/" target="_blank">DESIGNER</a>
+            <a href="https://chid.kr/" target="_blank" rel="noopener">DESIGNER</a>
         </div>
     </nav>
 
     <!-- Artworks on Main Page -->
     <div class="artwork-container" id="artwork-statue" data-name="statue">
         <div class="artwork-outline"></div>
-        <img src="assets/main/statue.svg" alt="Statue" class="artwork-img">
+        <img src="assets/main/statue.svg" alt="금동반가사유상" class="artwork-img" width="176" height="375" decoding="async">
         <div class="glass-button">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
@@ -36,7 +46,7 @@
 
     <div class="artwork-container" id="artwork-monalisa" data-name="monalisa">
         <div class="artwork-outline"></div>
-        <img src="assets/main/monalisa.svg" alt="Monalisa" class="artwork-img">
+        <img src="assets/main/monalisa.svg" alt="모나리자" class="artwork-img" width="268" height="281" decoding="async">
         <div class="glass-button">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
@@ -46,7 +56,7 @@
     <div class="popup-overlay" id="artwork-popup">
         <div class="info-card glass-panel">
             <div class="card-media">
-                <img id="popup-image" alt="Artwork" src="">
+                <img id="popup-image" alt="" decoding="async">
             </div>
             <button class="icon-button card-close" type="button" aria-label="닫기" id="popup-close">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7 L17 17 M17 7 L7 17"/></svg>
@@ -76,12 +86,12 @@
                 <!-- Text will be injected via JS -->
             </div>
         </div>
-        <a href="https://drive.google.com/file/d/1jBMdv7a4orFHYLm6jtfpkCQSXf2VfoEq/view?usp=drivesdk" target="_blank" class="download-btn">
+        <a href="https://drive.google.com/drive/folders/1oZ0c1S5IYdZAh2HoCLbxfmhbVeXMtTHK?usp=sharing" target="_blank" rel="noopener" class="download-btn">
             DOWNLOAD KUNST (<img src="assets/img/windows-11.svg" alt="Windows" class="win-icon">WINDOWS 11)
         </a>
     </section>
 
-    <script src="static/js/script.js"></script>
-    <script src="static/js/ar.js"></script>
+    <script src="static/js/script.js" defer></script>
+    <script src="static/js/ar.js" defer></script>
 </body>
 </html>

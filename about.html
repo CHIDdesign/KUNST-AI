@@ -7,18 +7,23 @@
     <meta name="description" content="KUNST는 스마트폰도 안내문도 없이, 작품에서 눈을 떼지 않고 보고·고르고·질문하는 감상을 구현하는 혼합현실 AI 도슨트입니다. 시스템 아키텍처와 핵심 AI 모델 명세.">
     <meta property="og:title" content="KUNST - 혼합현실 AI 도슨트">
     <meta property="og:description" content="보고, 선택하고, 질문하는 혼합현실 AI 도슨트. 시스템 아키텍처와 핵심 AI 모델 명세.">
-    <meta property="og:image" content="assets/about/architecture.jpg">
+    <meta property="og:image" content="https://kunst.ai.kr/assets/about/architecture.jpg">
+    <meta property="og:url" content="https://kunst.ai.kr/about.html">
     <meta property="og:type" content="website">
+    <meta name="theme-color" content="#121212">
+    <link rel="canonical" href="https://kunst.ai.kr/about.html">
     <link rel="icon" type="image/svg+xml" href="assets/main/KUNST_favicon.svg">
-    <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="static/css/about.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Syncopate:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Load a modern sans-serif for Korean (Pretendard) as alternative to generic fonts -->
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <script>document.documentElement.className = 'js';</script><!-- scroll reveals only hide content when JS is there to show it again -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/about.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Pretendard, dynamic subset: only the glyph ranges the page uses are downloaded, not the whole Korean font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
 <body class="about-page technical-mode">
     <div class="cursor"></div>
@@ -30,26 +35,39 @@
         </a>
         <div class="nav-links">
             <a href="index.html">MAIN</a>
-            <a href="https://chid.kr/" target="_blank">DESIGNER</a>
+            <a href="https://chid.kr/" target="_blank" rel="noopener">DESIGNER</a>
         </div>
     </nav>
 
     <!-- 1. TECHNICAL HERO -->
-    <section class="hero-section text-heavy split-hero">
-        <div class="hero-content">
-            <div class="eyebrow-tech">SYSTEM SPECIFICATION &amp; VISION</div>
-            <h1 class="hero-headline">KUNST<br>AI DOCENT<br>SYSTEM.</h1>
-        </div>
-        <div class="hero-side">
+    <section class="hero-section">
+        <div class="eyebrow-tech reveal"><span class="ear-dot"></span>SYSTEM SPECIFICATION &amp; VISION</div>
+        <h1 class="hero-headline reveal">
+            <span class="line">KUNST</span>
+            <span class="line">AI DOCENT<svg class="scan-loop" viewBox="0 0 560 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M39 57 C22 22 157 5 302 7 C448 10 549 25 538 55 C526 85 398 95 252 92 C118 90 17 78 45 38"/></svg></span>
+            <span class="line outline">SYSTEM.</span>
+        </h1>
+        <div class="hero-foot reveal" style="--d: 0.15s">
             <p class="hero-subtext tech-subtext">
                 보고, 선택하고, 질문하는<br>혼합현실 AI 도슨트
             </p>
+            <ol class="hero-steps">
+                <li><b>01</b>SEE</li>
+                <li><b>02</b>SELECT</li>
+                <li><b>03</b>ASK</li>
+            </ol>
         </div>
     </section>
 
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; </span><span>SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; SEE &middot; SELECT &middot; ASK &middot; 보고 &middot; 고르고 &middot; 질문하다 &middot; </span>
+        </div>
+    </div>
+
     <!-- 2. OVERVIEW -->
     <section class="overview-section">
-        <div class="overview-container grid-2-asymmetric">
+        <div class="overview-container grid-2-asymmetric reveal">
             <div class="overview-left">
                 <h2 class="section-title">THE<br>VISION.</h2>
                 <div class="accent-line"></div>
@@ -59,7 +77,7 @@
                     전문 도슨트는 시간·장소·인원에 묶여 있고, 오디오 가이드는 정해진 설명을 일방적으로 재생할 뿐이라, 관람객은 작품에서 눈을 떼야 하고 떠오른 궁금증은 답을 얻지 못한 채 남습니다.
                 </p>
                 <p class="lead-text highlight-text">
-                    KUNST는 스마트폰도 안내문도 없이,<br>작품에서 눈을 떼지 않고 보고·고르고·질문하는 감상을 AI로 구현합니다.
+                    KUNST는 스마트폰도 안내문도 없이,<br>작품에서 눈을 떼지 않고 <span class="mark">보고·고르고·질문하는 감상</span>을 AI로 구현합니다.
                 </p>
             </div>
         </div>
@@ -69,9 +87,9 @@
     <section class="pillars-section">
         <div class="pillars-grid">
             <!-- Pillar 1 -->
-            <div class="pillar-card">
+            <div class="pillar-card reveal">
                 <div class="pillar-header">
-                    <div class="pillar-num">01</div>
+                    <div class="pillar-num">01<span>SEE</span></div>
                     <h3 class="pillar-title">보는 순간 인식</h3>
                 </div>
                 <div class="pillar-desc">
@@ -87,9 +105,9 @@
             </div>
             
             <!-- Pillar 2 -->
-            <div class="pillar-card offset-card">
+            <div class="pillar-card offset-card reveal">
                 <div class="pillar-header">
-                    <div class="pillar-num">02</div>
+                    <div class="pillar-num">02<span>SELECT</span></div>
                     <h3 class="pillar-title">손끝으로 선택</h3>
                 </div>
                 <div class="pillar-desc">
@@ -103,9 +121,9 @@
             </div>
             
             <!-- Pillar 3 -->
-            <div class="pillar-card offset-card-more">
+            <div class="pillar-card offset-card-more reveal">
                 <div class="pillar-header">
-                    <div class="pillar-num">03</div>
+                    <div class="pillar-num">03<span>ASK</span></div>
                     <h3 class="pillar-title">묻는 즉시 답변</h3>
                 </div>
                 <div class="pillar-desc">
@@ -123,8 +141,9 @@
     <!-- 4. CORE ALGORITHMS -->
     <section class="models-section" id="models-wrap">
         <div class="models-header-container">
-            <h2 class="section-title text-center" style="text-align: center;">CORE <span class="highlight">ALGORITHMS</span></h2>
-            <p class="section-desc" style="margin: 0 auto 4rem auto; text-align: center;">KUNST 시스템의 두뇌 역할을 하는 오픈소스 및 상용 AI 모델 파이프라인 명세서입니다.</p>
+            <h2 class="section-title">CORE <span class="highlight">ALGORITHMS</span></h2>
+            <p class="section-desc">KUNST 시스템의 두뇌 역할을 하는 오픈소스 및 상용 AI 모델 파이프라인 명세서입니다.</p>
+            <div class="models-counter" aria-hidden="true"><b id="models-index">01</b> / 08</div>
         </div>
 
         <div class="models-overflow">
@@ -147,7 +166,7 @@
                 <div class="spec-card">
                     <div class="spec-header">
                         <div class="spec-badge">VISION ENGINE</div>
-                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img">
+                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img" width="28" height="28" loading="lazy" decoding="async">
                     </div>
                     <div class="spec-title">DINOv2 + ALIKED</div>
                     <div class="spec-vendor">Meta Fundamental AI Research (FAIR)</div>
@@ -158,7 +177,7 @@
                 <div class="spec-card">
                     <div class="spec-header">
                         <div class="spec-badge">VISION ENGINE</div>
-                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img">
+                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img" width="28" height="28" loading="lazy" decoding="async">
                     </div>
                     <div class="spec-title">SAM 2.1</div>
                     <div class="spec-vendor">Segment Anything Model 2 (Meta)</div>
@@ -169,7 +188,7 @@
                 <div class="spec-card">
                     <div class="spec-header">
                         <div class="spec-badge">INTERACTION</div>
-                        <img src="https://cdn.simpleicons.org/google/ffffff" alt="Google" class="spec-logo-img">
+                        <img src="https://cdn.simpleicons.org/google/ffffff" alt="Google" class="spec-logo-img" width="28" height="28" loading="lazy" decoding="async">
                     </div>
                     <div class="spec-title">YOLOv10n-hands</div>
                     <div class="spec-vendor">Ultralytics / Google MediaPipe</div>
@@ -180,7 +199,7 @@
                 <div class="spec-card">
                     <div class="spec-header">
                         <div class="spec-badge">AUDIO PIPELINE</div>
-                        <img src="https://cdn.simpleicons.org/onnx/ffffff" alt="ONNX" class="spec-logo-img">
+                        <img src="https://cdn.simpleicons.org/onnx/ffffff" alt="ONNX" class="spec-logo-img" width="28" height="28" loading="lazy" decoding="async">
                     </div>
                     <div class="spec-title">sherpa-onnx</div>
                     <div class="spec-vendor">Next-gen Kaldi / ONNX Runtime</div>
@@ -191,7 +210,7 @@
                 <div class="spec-card">
                     <div class="spec-header">
                         <div class="spec-badge">LLM DOCENT</div>
-                        <img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Google Gemini" class="spec-logo-img">
+                        <img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Google Gemini" class="spec-logo-img" width="28" height="28" loading="lazy" decoding="async">
                     </div>
                     <div class="spec-title">Google Gemini API</div>
                     <div class="spec-vendor">Google DeepMind</div>
@@ -213,7 +232,7 @@
                 <div class="spec-card">
                     <div class="spec-header">
                         <div class="spec-badge">DATABASE</div>
-                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img">
+                        <img src="https://cdn.simpleicons.org/meta/ffffff" alt="Meta" class="spec-logo-img" width="28" height="28" loading="lazy" decoding="async">
                     </div>
                     <div class="spec-title">FAISS Indexing</div>
                     <div class="spec-vendor">Facebook AI Similarity Search</div>
@@ -226,7 +245,7 @@
 
     <!-- 5. DEEP DIVE: ARCHITECTURE & INTERACTION -->
     <section class="deep-dive-section">
-        <div class="deep-dive-header">
+        <div class="deep-dive-header reveal">
             <h2 class="section-title">DEEP <span class="highlight">DIVE</span></h2>
             <div class="accent-line"></div>
         </div>
@@ -234,7 +253,7 @@
         <div class="feature-rows">
             
             <!-- Feature 1 -->
-            <div class="feature-row">
+            <div class="feature-row reveal">
                 <div class="feature-number">01</div>
                 <div class="feature-content">
                     <h3 class="feature-headline">시야부터 답변까지, 멈추지 않는 병렬 처리 아키텍처</h3>
@@ -243,7 +262,7 @@
                         <p>손 추적은 독립 프로세스에서, 작품 인식과 윤곽선 추출은 각각 별도의 병렬 루프에서, 음성 질의응답은 별도의 파이프라인에서 처리됩니다. 메인 루프는 이 결과들만 모아 AR 화면으로 합성합니다. 또한 실행 시 모든 모델을 미리 한 번씩 워밍업하여 첫 인식에서 생기는 멈춤도 없앴습니다.</p>
                     </div>
                     <figure class="feature-figure">
-                        <img src="assets/about/architecture.jpg" alt="KUNST 시스템 아키텍처 다이어그램" width="2000" height="1125">
+                        <a href="assets/about/architecture.jpg" target="_blank" rel="noopener" aria-label="원본 크기로 보기"><img src="assets/about/architecture.webp" alt="KUNST 시스템 아키텍처 다이어그램" width="1600" height="900" loading="lazy" decoding="async"></a>
                         <figcaption>KUNST AI 시스템 아키텍처</figcaption>
                     </figure>
 
@@ -275,7 +294,7 @@
             </div>
 
             <!-- Feature 2 -->
-            <div class="feature-row reverse-row">
+            <div class="feature-row reverse-row reveal">
                 <div class="feature-number">02</div>
                 <div class="feature-content">
                     <h3 class="feature-headline">손끝이 곧 인터페이스, 실시간 핸드 트래킹</h3>
@@ -284,7 +303,7 @@
                         <p>손 추적 연산은 메인 프로그램과 분리된 독립 프로세스에서 공유 메모리로 영상을 주고받으며 처리되므로, 화면이 느려지지 않습니다. 사람은 시각과 촉각, 운동감각이 함께 작동할 때 대상에 더 깊이 몰입합니다. 이에 KUNST는 관람객이 작품을 눈으로 바라보며 직접 손을 뻗어 고르는, '보는 행위'와 '고르는 행위'가 하나로 이어지는 상호작용을 설계했습니다.</p>
                     </div>
                     <figure class="feature-figure">
-                        <img src="assets/about/hand-tracking.jpg" alt="두 손의 관절을 실시간으로 추적하는 KUNST 실행 화면" width="2000" height="1125" loading="lazy">
+                        <a href="assets/about/hand-tracking.jpg" target="_blank" rel="noopener" aria-label="원본 크기로 보기"><img src="assets/about/hand-tracking.webp" alt="두 손의 관절을 실시간으로 추적하는 KUNST 실행 화면" width="1600" height="900" loading="lazy" decoding="async"></a>
                         <figcaption>실제 프로그램 화면입니다.</figcaption>
                     </figure>
 
@@ -292,7 +311,7 @@
             </div>
 
             <!-- Feature 3 -->
-            <div class="feature-row">
+            <div class="feature-row reveal">
                 <div class="feature-number">03</div>
                 <div class="feature-content">
                     <h3 class="feature-headline">Pinch 제스처 기반의 정밀 작품 선택</h3>
@@ -302,7 +321,7 @@
                         <p>또한 히스테리시스 특성으로 선택 신호가 경계에서 깜빡이는 현상을 막아 의도한 순간에만 정확히 선택이 이루어집니다. 손이 작품을 가리더라도 이전 프레임의 윤곽선으로 빈 곳을 메우는 가림 보정 덕분에 윤곽선이 끊기지 않습니다.</p>
                     </div>
                     <figure class="feature-figure">
-                        <img src="assets/about/pinch-select.jpg" alt="작품 윤곽선 위에서 핀치 제스처로 작품을 선택하는 화면" width="2000" height="1125" loading="lazy">
+                        <a href="assets/about/pinch-select.jpg" target="_blank" rel="noopener" aria-label="원본 크기로 보기"><img src="assets/about/pinch-select.webp" alt="작품 윤곽선 위에서 핀치 제스처로 작품을 선택하는 화면" width="1600" height="900" loading="lazy" decoding="async"></a>
                         <figcaption>실제 프로그램 화면입니다.</figcaption>
                     </figure>
 
@@ -310,7 +329,7 @@
             </div>
 
             <!-- Feature 4 -->
-            <div class="feature-row reverse-row">
+            <div class="feature-row reverse-row reveal">
                 <div class="feature-number">04</div>
                 <div class="feature-content">
                     <h3 class="feature-headline">작품 옆에 떠오르는 AR 정보 카드 &amp; 로컬 데이터베이스</h3>
@@ -320,7 +339,7 @@
                         <p>KUNST Studio에서 작품 이름과 작가, 연도, 설명문과 사진을 넣고 <strong>신규 작품 등록</strong>을 누르면, 작품 폴더와 기록이 만들어지고 설명문이 한국어·영어 도슨트 대본과 추천 질문으로 정리된 뒤 인식 인덱스에 추가됩니다. <strong>전체 재분석</strong>은 등록된 모든 작품의 사진을 최신 모델로 다시 분석해 인식 인덱스를 새로 만들고, 대본과 추천 질문도 함께 다시 생성합니다. 해설과 추천 질문은 등록 시점에 한 번만 생성되므로 관람 중 반복되는 LLM 호출 비용이 들지 않습니다.</p>
                     </div>
                     <figure class="feature-figure">
-                        <img src="assets/about/ar-card-studio.jpg" alt="작품 옆에 뜬 AR 정보 카드와 KUNST Studio 작품 데이터베이스 화면" width="2000" height="1125" loading="lazy">
+                        <a href="assets/about/ar-card-studio.jpg" target="_blank" rel="noopener" aria-label="원본 크기로 보기"><img src="assets/about/ar-card-studio.webp" alt="작품 옆에 뜬 AR 정보 카드와 KUNST Studio 작품 데이터베이스 화면" width="1600" height="900" loading="lazy" decoding="async"></a>
                         <figcaption>실제 프로그램 화면입니다. (오른쪽: KUNST Studio)</figcaption>
                     </figure>
 
@@ -328,7 +347,7 @@
             </div>
 
             <!-- Feature 5 -->
-            <div class="feature-row">
+            <div class="feature-row reveal">
                 <div class="feature-number">05</div>
                 <div class="feature-content">
                     <h3 class="feature-headline">언제든 묻고 답하는 양방향 AI 도슨트</h3>
@@ -338,7 +357,7 @@
                         <p>답변은 스트리밍으로 도착하는 즉시 호흡 단위의 문장으로 나뉘어 음성으로 합성되고, 음성 길이에 맞춰 자막이 함께 표시됩니다. 덕분에 관람객은 답변 전체를 기다리지 않고 바로 듣고 읽을 수 있습니다.</p>
                     </div>
                     <figure class="feature-figure">
-                        <img src="assets/about/ai-docent.jpg" alt="질문에 대한 답변이 음성과 자막으로 표시되는 화면" width="2000" height="1125" loading="lazy">
+                        <a href="assets/about/ai-docent.jpg" target="_blank" rel="noopener" aria-label="원본 크기로 보기"><img src="assets/about/ai-docent.webp" alt="질문에 대한 답변이 음성과 자막으로 표시되는 화면" width="1600" height="900" loading="lazy" decoding="async"></a>
                         <figcaption>실제 프로그램 화면입니다.</figcaption>
                     </figure>
 
@@ -349,10 +368,10 @@
     </section>
 
     <!-- 6. DOWNLOAD -->
-    <section class="cta-section">
+    <section class="cta-section reveal">
         <h2 class="section-title">GET <span class="highlight">KUNST</span>.</h2>
-        <p class="section-desc" style="margin-bottom: 2.5rem;">데스크톱 실행 파일과 전시장용 관리 도구 KUNST Studio가 함께 제공됩니다.</p>
-        <a href="https://drive.google.com/file/d/1jBMdv7a4orFHYLm6jtfpkCQSXf2VfoEq/view?usp=drivesdk" target="_blank" class="download-btn">
+        <p class="section-desc">데스크톱 실행 파일과 전시장용 관리 도구 KUNST Studio가 함께 제공됩니다.</p>
+        <a href="https://drive.google.com/drive/folders/1oZ0c1S5IYdZAh2HoCLbxfmhbVeXMtTHK?usp=sharing" target="_blank" rel="noopener" class="download-btn">
             DOWNLOAD KUNST (<img src="assets/img/windows-11.svg" alt="Windows" class="win-icon">WINDOWS 11)
         </a>
     </section>

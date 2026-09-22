@@ -5,6 +5,7 @@
     --text-muted: #61605F;
     --font-mono: 'JetBrains Mono', monospace;
     --font-display: 'Syncopate', sans-serif;
+    --font-body: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 * {
@@ -108,11 +109,13 @@ html, body {
 body.index-page {
     overflow: hidden; /* No scroll on index */
     height: 100vh;
+    height: 100dvh; /* phones: the visible area, not the one hidden behind the URL bar */
     background-color: #080808; /* Darker background just for index */
 }
 
 .hero {
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -398,21 +401,20 @@ body.index-page::before {
 }
 /* The whole card is one em-scale: every size below is em, so changing .info-card's
    font-size shrinks the card as a unit and the text keeps wrapping the same way.
-   48.5em is the tallest card's height in these units; 1.96vh = 95vh / 48.5, i.e. the
-   card fills the viewport height minus ~2.5vh of breathing room above and below.
-   JS sets `left` (desktop, beside the artwork) and data-art. */
-.info-card { margin: auto 0; flex-shrink: 0; font-size: min(15px, 1.96vh); width: 16.25em; border-radius: 1.875em; overflow: hidden; }
-/* Sized from the lighter card (statue); monalisa's longer facts/summary get a little
-   more width so they keep the same line count instead of spilling */
-.info-card[data-art="monalisa"] { width: 17.5em; }
+   The card is 24em x 42.67em (9:16) and its font-size is whichever of the two viewport
+   dimensions binds first, so on any screen the whole card fits with a 16px margin.
+   The photo takes whatever height the text leaves. JS sets `left` (desktop, beside the artwork). */
+.info-card { margin: auto 0; flex-shrink: 0; width: 24em; aspect-ratio: 9 / 16; display: flex; flex-direction: column; border-radius: 1.875em; overflow: hidden;
+             font-size: min(15px, calc((100vw - 32px) / 24), calc((100vh - 32px) / 42.67));
+             font-size: min(15px, calc((100vw - 32px) / 24), calc((100dvh - 32px) / 42.67)); }
 
-.card-media { display: flex; align-items: center; justify-content: center; padding: 0.625em 0.625em 0; }
-.card-media img { display: block; width: 100%; height: auto; border-radius: 1.3125em; }
+.card-media { flex: 1; min-height: 0; padding: 0.625em 0.625em 0; }
+.card-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 1.3125em; }
 .card-body { padding: 0.875em 1.25em 0.25em; }
-.card-title { margin: 0 0 0.444em; font-size: 1.125em; font-weight: 650; line-height: 1.25; letter-spacing: -0.02em; color: var(--text-main); font-family: 'Pretendard', sans-serif;}
-.card-facts { display: flex; flex-wrap: wrap; gap: 0.348em 0.87em; margin: 0 0 0.87em; font-size: 0.719em; line-height: 1.45; color: rgba(244, 244, 244, 0.66); font-family: 'Pretendard', sans-serif;}
+.card-title { margin: 0 0 0.444em; font-size: 1.125em; font-weight: 650; line-height: 1.25; letter-spacing: -0.02em; color: var(--text-main); font-family: var(--font-body);}
+.card-facts { display: flex; flex-wrap: wrap; gap: 0.348em 0.87em; margin: 0 0 0.87em; font-size: 0.719em; line-height: 1.45; color: rgba(244, 244, 244, 0.66); font-family: var(--font-body);}
 .card-facts span + span::before { content: ''; display: inline-block; width: 0.26em; height: 0.26em; border-radius: 50%; background: rgba(244, 244, 244, 0.42); margin-right: 0.87em; vertical-align: middle; transform: translateY(-0.087em); }
-.card-summary { margin: 0; font-size: 0.875em; line-height: 1.5; color: rgba(244, 244, 244, 0.9); word-break: keep-all; font-family: 'Pretendard', sans-serif;}
+.card-summary { margin: 0; font-size: 0.875em; line-height: 1.5; color: rgba(244, 244, 244, 0.9); word-break: keep-all; font-family: var(--font-body);}
 
 .icon-button { border: 0; padding: 0; cursor: pointer; font-size: 1em; border-radius: 50%; display: flex; align-items: center; justify-content: center;
                background: rgba(18, 18, 18, 0.42); box-shadow: inset 0 0 0 1px rgba(244, 244, 244, 0.28);
@@ -422,7 +424,7 @@ body.index-page::before {
 .card-close { position: absolute; top: 1.25em; right: 1.25em; width: 2em; height: 2em; z-index: 10; }
 .card-close svg { width: 0.875em; height: 0.875em; }
 
-.ask { margin-top: 0.875em; padding: 0.875em 1.25em 1.125em; border-top: 1px solid rgba(244, 244, 244, 0.10); font-family: 'Pretendard', sans-serif; }
+.ask { margin-top: 0.875em; padding: 0.875em 1.25em 1.125em; border-top: 1px solid rgba(244, 244, 244, 0.10); font-family: var(--font-body); }
 .ask-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75em; }
 .ask-title { font-size: 0.75em; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244, 244, 244, 0.66); }
 .ask-title b { color: var(--text-main); font-weight: 750; }
@@ -458,13 +460,19 @@ body.index-page::before {
         padding: 1rem;
     }
 
-    .nav-links {
-        gap: 1rem;
+    .nav-brand img {
+        height: 20px;
     }
-    
+
+    .nav-links {
+        gap: 0.25rem;
+    }
+
+    /* fluid, one line each: logo + both links fit from 320px up */
     .nav-links a {
-        font-size: 0.8rem;
-        padding: 0.25rem 0.5rem;
+        font-size: clamp(0.62rem, 3.1vw, 0.8rem);
+        padding: 0.25rem 0.4rem;
+        white-space: nowrap;
     }
 
     .hero {
@@ -475,6 +483,11 @@ body.index-page::before {
         /* Add side padding so it doesn't touch the edges */
         width: calc(100vw - 32px);
         height: 40vh; /* Shorter height to fit mobile aspect ratio */
+    }
+
+    /* the box's own 16px strut kept every line ~21px tall however small the words: let the words set it */
+    .text-logo {
+        line-height: 0;
     }
 
     .text-logo span {
@@ -516,17 +529,23 @@ body.index-page::before {
         height: 16px;
     }
 
-    /* Both cards take the fuller card's width here, and the scale is whichever of the
-       two screen dimensions binds first, so the taller card fits with a 16px margin */
+    /* Centred; beats the inline `left` JS sets for desktop, also after a rotate/resize with the card open */
     .popup-overlay {
         justify-content: center;
     }
 
-    .info-card,
-    .info-card[data-art="monalisa"] {
-        left: 0;
-        width: 17.5em;
-        font-size: min(16px, calc((100vw - 32px) / 17.5), calc((100dvh - 32px) / 48.5));
+    .info-card {
+        left: 0 !important;
     }
 }
 
+/* Touch screens have no pointer to decorate, whatever their width */
+@media (hover: none) {
+    .cursor, .cursor-follower, .crosshair-x, .crosshair-y, .coord-tracker {
+        display: none !important;
+    }
+
+    * {
+        cursor: auto;
+    }
+}

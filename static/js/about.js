@@ -1,90 +1,67 @@
-// GSAP Animations for KUNST About Page
+// Reveal on scroll: native IntersectionObserver flips .in, CSS does the motion (see `.js .reveal` in about.css)
+const revealer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        revealer.unobserve(entry.target);
+    });
+}, { rootMargin: '0px 0px -12% 0px' });
+document.querySelectorAll('.reveal, .feature-figure').forEach(el => revealer.observe(el));
+
+// Hero spotlight follows the pointer
+const hero = document.querySelector('.hero-section');
+hero.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    hero.style.setProperty('--my', `${e.clientY - r.top}px`);
+});
+
+// GSAP: only the pinned horizontal reel of Core Algorithms. Without it (CDN blocked) or on
+// narrow screens the cards stay the plain CSS grid, so nothing below is needed to read the page.
 document.addEventListener("DOMContentLoaded", () => {
     if (typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
+    document.documentElement.classList.add('has-gsap');
 
-    // 1. FADE IN (Hero & Overview)
-    const fadeSections = gsap.utils.toArray('.hero-section, .overview-section, .pillar-card, .feature-row');
-    fadeSections.forEach((sec) => {
-        gsap.from(sec, {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: sec,
-                start: "top 85%",
-            }
-        });
-    });
-
-    // 2. HORIZONTAL PAN & HIGHLIGHT (Core Algorithms)
     const modelsWrap = document.getElementById("models-wrap");
     const modelsTrack = document.getElementById("models-track");
+    const modelsIndex = document.getElementById("models-index");
     const specCards = gsap.utils.toArray('.spec-card');
 
-    if (modelsWrap && modelsTrack && specCards.length > 0) {
-        let mm = gsap.matchMedia();
-
-        mm.add("(min-width: 1025px)", () => {
-            const totalScroll = specCards.length * window.innerWidth * 0.4;
-            
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: modelsWrap,
-                    start: "center center",
-                    end: () => `+=${totalScroll}`,
-                    pin: true,
-                    scrub: 1,
-                    snap: {
-                        snapTo: 1 / (specCards.length - 1),
-                        duration: { min: 0.2, max: 0.8 },
-                        delay: 0.1,
-                        ease: "power2.inOut"
-                    },
-                    invalidateOnRefresh: true,
-                }
-            });
-
-            tl.to(modelsTrack, {
-                x: () => {
-                    const firstCard = specCards[0];
-                    const lastCard = specCards[specCards.length - 1];
-                    return -(lastCard.offsetLeft - firstCard.offsetLeft);
+    gsap.matchMedia().add("(min-width: 1025px)", () => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: modelsWrap,
+                start: "center center",
+                end: () => `+=${specCards.length * window.innerWidth * 0.4}`,
+                pin: true,
+                scrub: 1,
+                snap: {
+                    snapTo: 1 / (specCards.length - 1),
+                    duration: { min: 0.2, max: 0.8 },
+                    delay: 0.1,
+                    ease: "power2.inOut"
                 },
-                ease: "none"
-            }, 0);
-
-            tl.eventCallback("onUpdate", function() {
-                const progress = this.progress();
-                let cardIndex = Math.round(progress * (specCards.length - 1));
-                cardIndex = Math.max(0, Math.min(specCards.length - 1, cardIndex));
-                
-                specCards.forEach((c, i) => {
-                    if (i === cardIndex) {
-                        c.classList.add('active');
-                    } else {
-                        c.classList.remove('active');
-                    }
-                });
-            });
-
-            return () => {
-                specCards.forEach(c => c.classList.remove('active'));
-            };
+                invalidateOnRefresh: true,
+            }
         });
 
-        mm.add("(max-width: 1024px)", () => {
+        tl.to(modelsTrack, {
+            x: () => -(specCards[specCards.length - 1].offsetLeft - specCards[0].offsetLeft),
+            ease: "none"
+        }, 0);
+
+        const spotlight = () => {
+            const cardIndex = Math.round(tl.progress() * (specCards.length - 1));
+            specCards.forEach((c, i) => c.classList.toggle('active', i === cardIndex));
+            modelsIndex.textContent = String(cardIndex + 1).padStart(2, '0');
+        };
+        tl.eventCallback("onUpdate", spotlight);
+        spotlight();
+
+        return () => {
             gsap.set(modelsTrack, { clearProps: "all" });
-            specCards.forEach((c) => {
-                gsap.set(c, { clearProps: "all" });
-                c.classList.add('active');
-            });
-            
-            return () => {
-                specCards.forEach(c => c.classList.remove('active'));
-            };
-        });
-    }
-
+            specCards.forEach(c => c.classList.remove('active'));
+        };
+    });
 });
